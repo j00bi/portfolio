@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Husni Sarafi · Resume</title>
+<meta name="author" content="Husni Sarafi">
+<meta name="description" content="RPA Consultant — Resume">
+<meta name="keywords" content="RPA, BluePrism, UiPath, Automation, AI">
+<meta name="generator" content="Kami">
+<style>
+  @font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 11mm 13mm 11mm 13mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --border:    #e8e6dc;
+    --border-soft: #e5e3d8;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --brand-tint: #EEF2F7;
+    --brand-tint-strong: #E4ECF5;
+
+    --serif: Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 9.4pt;
+    line-height: 1.42;
+    letter-spacing: 0;
+  }
+
+  .serif { font-family: var(--serif); }
+  .mono  { font-family: var(--mono); }
+
+  a { color: var(--brand); text-decoration: none; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3mm;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .header > div:first-child { flex-shrink: 0; }
+  .name {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    letter-spacing: -0.2pt;
+    color: var(--near-black);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    white-space: nowrap;
+  }
+  .alias {
+    font-size: 12.5pt;
+    font-weight: 400;
+    color: var(--stone);
+  }
+  .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .contact .role {
+    color: var(--brand);
+    font-size: 10.5pt;
+    font-weight: 500;
+  }
+  .contact .sep { color: var(--border); margin: 0 0.4em; }
+  .contact a { color: var(--dark-warm); }
+  .contact .loc { color: var(--olive); font-weight: 500; }
+
+  /* METRICS */
+  .metrics { display: flex; gap: 7mm; margin-bottom: 3mm; }
+  .metric {
+    flex: 1;
+    padding: 1mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-value .unit {
+    font-size: 10.5pt;
+    margin-left: 0.5mm;
+    font-weight: 500;
+    color: var(--brand);
+  }
+  .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.2; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--near-black);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding: 0 0 0 8pt;
+    margin: 5mm 0 2mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2.5mm;
+  }
+  .section-title .sub {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 0.2pt;
+  }
+  section:first-of-type .section-title { margin-top: 0; }
+  .page-break > .section-title { margin-top: 0; }
+
+  /* SUMMARY */
+  .summary { font-size: 9.4pt; line-height: 1.42; color: var(--near-black); }
+  .summary .hl { color: var(--brand); }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 7mm; margin-bottom: 2.5mm; }
+  .tl-step { flex: 1; padding: 0.8mm 0; break-inside: avoid; }
+  .tl-top {
+    display: flex; align-items: baseline; gap: 2mm;
+    margin-bottom: 0.6mm;
+  }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 500;
+    color: var(--brand); line-height: 1;
+  }
+  .tl-head {
+    font-size: 11pt; font-weight: 500;
+    color: var(--near-black);
+  }
+  .tl-body { font-size: 9pt; color: var(--olive); line-height: 1.45; }
+
+  /* PROJECTS */
+  .project {
+    padding: 1.6mm 0;
+    border-top: 0.4pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .project:first-of-type {
+    border-top: 0.4pt solid var(--border);
+    padding-top: 1.6mm;
+  }
+  .proj-head {
+    display: flex; align-items: baseline;
+    gap: 2mm; margin-bottom: 0.9mm;
+  }
+  .proj-name {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 500; color: var(--near-black);
+  }
+  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-role {
+    font-size: 9pt; color: var(--brand); font-weight: 500;
+    margin-left: auto; background: #EEF2F7;
+    padding: 0.4mm 1.6mm; border-radius: 2pt; letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .proj-lines { display: table; width: 100%; }
+  .proj-row { display: table-row; }
+  .proj-label {
+    display: table-cell; width: 16mm;
+    font-size: 9pt; color: var(--brand);
+    font-weight: 500; letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    padding: 0.4mm 0 0.4mm 0; vertical-align: top;
+  }
+  .proj-text {
+    display: table-cell; font-size: 9.2pt;
+    color: var(--near-black); line-height: 1.45;
+    padding: 0 0 0.4mm 1mm;
+  }
+  .proj-text .hl { color: var(--brand); }
+
+  /* PAGE 2 FORCE BREAK */
+  .page-break { break-before: page; }
+
+  /* SIDE PROJECTS */
+  .os-intro {
+    font-size: 9.4pt; line-height: 1.45;
+    color: var(--near-black);
+    margin: 1.6mm 0 2.4mm 0;
+    break-inside: avoid;
+  }
+  .os-intro .hl { color: var(--brand); }
+  .os-intro .strong { color: var(--near-black); font-weight: 500; }
+
+  .side-project {
+    padding: 1.8mm 0;
+    border-bottom: 0.3pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .side-project:last-of-type { border-bottom: none; }
+  .sp-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 2mm;
+    margin-bottom: 0.5mm;
+  }
+  .sp-name {
+    font-family: var(--serif);
+    font-size: 10.5pt; font-weight: 500; color: var(--near-black);
+  }
+  .sp-tech { font-size: 9pt; color: var(--stone); }
+  .sp-desc { font-size: 9pt; color: var(--olive); line-height: 1.45; }
+  .sp-desc .hl { color: var(--brand); }
+
+  /* HIGHLIGHT BOX */
+  .os-highlight {
+    margin-top: 2.5mm;
+    padding: 1.8mm 3mm;
+    background: var(--brand-tint);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 2pt;
+    font-size: 9pt; line-height: 1.45;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  .os-highlight .hl { color: var(--brand); }
+  .os-highlight .tag {
+    display: inline-block;
+    background: var(--brand); color: var(--ivory);
+    font-size: 9pt; font-weight: 500;
+    padding: 0.2mm 1.6mm; border-radius: 2pt;
+    margin-right: 1.5mm; letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    transform: translateY(-0.2mm);
+  }
+
+  /* SKILLS */
+  .skill-row {
+    display: flex; gap: 3mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    align-items: baseline;
+  }
+  .skill-row:last-of-type { border-bottom: none; }
+  .skill-label {
+    font-size: 9pt; font-weight: 500;
+    color: var(--brand); letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    width: 32mm; flex-shrink: 0;
+    line-height: 1.35;
+  }
+  .skill-body { font-size: 9.2pt; color: var(--near-black); line-height: 1.45; flex: 1; }
+  .skill-body .em-brand { color: var(--brand); }
+
+  .no-break { break-inside: avoid; }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; padding: 1.8mm 0;
+  }
+  .edu-row .school {
+    font-family: var(--serif);
+    font-weight: 500; font-size: 11pt;
+  }
+  .edu-row .major { color: var(--olive); font-size: 9.4pt; }
+  .edu-row .date { color: var(--stone); font-variant-numeric: tabular-nums; font-size: 9pt; }
+</style>
+</head>
+<body>
+
+
+<!-- ═══════════ PAGE 1 ═══════════ -->
+
+<div class="header">
+  <div>
+    <div class="name serif">Husni Sarafi</div>
+  </div>
+  <div class="contact">
+    <span class="role">RPA Consultant · Automation Engineer</span>
+    <br>
+    <a href="https://github.com/j00bi">github.com/j00bi</a>
+    <span class="sep">·</span>
+    <a href="https://x.com/whoshusni">x.com/whoshusni</a>
+    <span class="sep">·</span>
+    <a href="mailto:husnisarafi17@gmail.com">husnisarafi17@gmail.com</a>
+    <span class="sep">·</span>
+    <span class="loc">Kuala Lumpur, Malaysia</span>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><span class="metric-value serif">3<span class="unit">yrs</span></span><span class="metric-label">automation & process delivery</span></div>
+  <div class="metric"><span class="metric-value serif">50<span class="unit">%</span></span><span class="metric-label">robot productivity increase</span></div>
+  <div class="metric"><span class="metric-value serif">99<span class="unit">%</span></span><span class="metric-label">live workflow uptime maintained</span></div>
+  <div class="metric"><span class="unit">3</span><span class="unit"> platforms</span><span class="metric-label">BluePrism · UiPath · AA</span></div>
+</div>
+
+<section>
+  <div class="section-title">Summary</div>
+  <div class="summary">
+    RPA Consultant at EY, managing <span class="hl">BluePrism processes</span> for a national utility provider's billing and metering operations. Three years spanning process delivery, RPA development, and enterprise consulting — started monitoring AutomationAnywhere robots at IBM, became a full RPA builder at E-Outsource, now delivering at scale with BluePrism. Self-taught developer outside work: AI meeting transcription, automotive UI, and smart home automation. Actuarial Science background; thinks in systems and probability. Exploring <span class="hl">agentic AI</span> as the next frontier beyond rule-based automation.
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Experience<span class="sub">2023 - Present · IBM → EOA → EY</span></div>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">2023</div><div class="tl-head">RPA seed planted</div></div>
+      <div class="tl-body">IBM — monitored AutomationAnywhere robots, experimented with VBA, contributed to live automation development.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">2024</div><div class="tl-head">RPA builder</div></div>
+      <div class="tl-body">E-Outsource Asia — flipped to the builder side with UiPath and AutomationAnywhere.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">2026</div><div class="tl-head">Enterprise consultant</div></div>
+      <div class="tl-body">EY — BluePrism at scale for a major utility provider. Agentic AI interest accelerates.</div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">Ernst & Young</span>
+      <span class="proj-kind">· BluePrism · Utility sector</span>
+      <span class="proj-role">consultant</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">Role</div>
+        <div class="proj-text">RPA Consultant — Associate, assigned to a national utility provider engagement. Managing and monitoring BluePrism processes across billing and advanced metering infrastructure (AMI) operations.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Actions</div>
+        <div class="proj-text">Handles a portfolio of live BP processes including SMART Meter Billing and AMI data pipelines. Monitors robot health, triages failures, and ensures process stability across high-volume transactional workflows.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Impact</div>
+        <div class="proj-text">Operational stability across <span class="hl">multiple critical billing cycles</span>. Exposure to enterprise-grade BluePrism at scale — the platform breadth here dwarfs any single process at previous roles.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">E-Outsource Asia</span>
+      <span class="proj-kind">· UiPath · AutomationAnywhere</span>
+      <span class="proj-role">associate consultant</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">Role</div>
+        <div class="proj-text">Associate Consultant — primary RPA developer. End-to-end ownership: process discovery, solution design, development, deployment, and post-launch monitoring across multiple client engagements.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Actions</div>
+        <div class="proj-text">Designed and shipped LOMAS (Logistics Management System) automation — tracking import/export liners, updating shipment plans, integrating SQL databases and APIs into robot workflows. Built e-invoice pipeline extracting data from SAP ERP, transforming to IRBM-mandated format, uploading via middleware. Developed Excel macro scripts for Purchase Order processing with cross-checking against customer records and SAPGUI posting.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Impact</div>
+        <div class="proj-text">Process enhancements expanded workflow scope and increased robot productivity by <span class="hl">50%</span>. Maintained <span class="hl">99% uptime</span> on all live workflows. Quarterly SOP and documentation cycles delivered consistently.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">IBM Malaysia</span>
+      <span class="proj-kind">· AutomationAnywhere · Accounts Receivable</span>
+      <span class="proj-role">process delivery specialist</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">Role</div>
+        <div class="proj-text">Process Delivery Specialist — Accounts Receivable, serving the Vietnamese market. Initially an end user, then assigned to <span class="hl">monitor live AutomationAnywhere robots</span> supporting the operations team.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Actions</div>
+        <div class="proj-text">Observed how senior developers combined <span class="hl">RPA with Excel macros</span> to automate AR workflows — invoice processing, payment reconciliation, aging reports. Started experimenting with VBA, built scripts that caught the team's attention, and eventually contributed to <span class="hl">live automation development</span>.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Impact</div>
+        <div class="proj-text">This is where the RPA journey started — went from watching robots run to writing code that ran on them. The VBA experiments and AA monitoring exposure directly led to the EOA RPA Consultant role.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ PAGE 2 ═══════════ -->
+
+<section class="page-break">
+  <div class="section-title">Independent Projects<span class="sub">2023 - Present · self-taught builder</span></div>
+
+  <div class="os-intro">
+    <span class="hl">Automation engineer by day, tinkerer by night.</span> Self-taught developer building tools that scratch real itches — meeting transcription, automotive UI, smart home lighting, and generative art. Gravitates toward tools that give control: self-hosting over SaaS, local LLMs over cloud-only APIs, CLIs over GUIs.
+  </div>
+
+  <div class="side-project">
+    <div class="sp-header">
+      <span class="sp-name serif">Meeting Min</span>
+      <span class="sp-tech">Python · Whisper · Ollama · SSH · Docker</span>
+    </div>
+    <div class="sp-desc">Self-hosted bilingual meeting minutes bot. Captures audio from Microsoft Teams, pipes through <span class="hl">Whisper</span> for speech-to-text (auto-detects Malay and English), generates structured summaries via LLM. Designed for locked-down corporate environments — audio captured locally, processed on remote server via SSH tunneling. <a href="https://github.com/j00bi/meeting-min">github.com/j00bi/meeting-min</a></div>
+  </div>
+
+  <div class="side-project">
+    <div class="sp-header">
+      <span class="sp-name serif">Mazda AIO</span>
+      <span class="sp-tech">HTML · CSS · JavaScript · React · Vite</span>
+    </div>
+    <div class="sp-desc">Custom speedometer dashboards and instrument cluster UIs for the <span class="hl">Mazda Connect CMU</span> head unit (2015 Mazda 2). Includes real-time driving data visualization and a React multi-screen app prototype. Exploration of embedded systems, CAN bus data, and automotive UI design on production hardware.</div>
+  </div>
+
+  <div class="side-project">
+    <div class="sp-header">
+      <span class="sp-name serif">RAG Demo</span>
+      <span class="sp-tech">Python · ChromaDB · Ollama · FastAPI</span>
+    </div>
+    <div class="sp-desc">Chat with your PDFs — a Retrieval-Augmented Generation system that lets you upload documents and ask questions about their content. Uses <span class="hl">ChromaDB</span> for vector storage and Ollama for local LLM inference. Self-hosted, privacy-first, Dockerized. <a href="https://github.com/j00bi/rag-demo">github.com/j00bi/rag-demo</a></div>
+  </div>
+
+  <div class="side-project">
+    <div class="sp-header">
+      <span class="sp-name serif">Yeelight Backlight</span>
+      <span class="sp-tech">Python · NumPy · MSS · TCP</span>
+    </div>
+    <div class="sp-desc">Real-time monitor ambient lighting — captures screen edges, averages colors, sends commands to a <span class="hl">Yeelight bslamp3</span> over LAN TCP. Iterated through 6 versions solving TCP buffer overflow (threaded sender + drop queue), temporal smoothing, dark mode fallback, and adaptive rate limiting. <a href="https://github.com/j00bi/yeelight-backlight">github.com/j00bi/yeelight-backlight</a></div>
+  </div>
+
+  <div class="side-project">
+    <div class="sp-header">
+      <span class="sp-name serif">Celestial Clock</span>
+      <span class="sp-tech">HTML Canvas · JavaScript · REST API</span>
+    </div>
+    <div class="sp-desc">Full-screen canvas rendering a prayer-synced sky — gradients tied to actual Islamic prayer times (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha) via Aladhan API. Features <span class="hl">sun arc</span>, moon with phase rendering, twinkling stars, and layered mountain silhouettes.</div>
+  </div>
+
+  <div class="side-project">
+    <div class="sp-header">
+      <span class="sp-name serif">Bursa Sector Catalyst</span>
+      <span class="sp-tech">Research · Data Analysis</span>
+    </div>
+    <div class="sp-desc">Sector-based catalyst analysis model for <span class="hl">Bursa Malaysia</span>. Applies actuarial probability thinking to stock market sector rotation patterns. Early research phase — stalled in favor of active RPA work and AI exploration.</div>
+  </div>
+
+  <div class="os-highlight">
+    <span class="tag">Builder instinct</span>Every project starts with "I wish this existed" and ends with something running on actual hardware — a car head unit, a living room lamp, a Teams meeting. The through-line is the same: understand the system from the inside, then automate it.
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Core Skills</div>
+  <div class="skill-row">
+    <div class="skill-label">RPA Platforms</div>
+    <div class="skill-body">Production experience across <span class="em-brand">BluePrism, UiPath, and AutomationAnywhere</span> — from process discovery to deployment and monitoring at enterprise scale.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">Integration</div>
+    <div class="skill-body">SQL databases, REST APIs, SAP ERP, and IRBM middleware. Built end-to-end pipelines from <span class="em-brand">data extraction through transformation to upload</span>.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">Languages</div>
+    <div class="skill-body">Python, JavaScript, VB.Net, PowerShell, SQL. HTML/CSS/JS for frontend projects. <span class="em-brand">Python</span> is the primary language for personal projects and automation scripting.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">AI & LLMs</div>
+    <div class="skill-body">Whisper STT, Ollama (local LLMs), RAG pipelines with ChromaDB, prompt engineering, bilingual MY/EN NLP. Running Hermes as <span class="em-brand">daily AI assistant</span> — building agentic workflows.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">Infrastructure</div>
+    <div class="skill-body"><span class="em-brand">Docker</span> containerization, SSH tunneling, Oracle Cloud deployment, FastAPI backends, REST API integration. Self-hosting over SaaS by default.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">Documentation</div>
+    <div class="skill-body">SOPs, user guides, FSD, SDD, SIT test scripts, technical READMEs. Quarterly documentation cycles at <span class="em-brand">EOA</span> delivered consistently across engagements.</div>
+  </div>
+</section>
+
+<section class="no-break">
+  <div class="section-title">Education</div>
+  <div class="edu-row">
+    <div>
+      <span class="school serif">UiTM Shah Alam</span>
+      <span class="major"> · BSc (Hons) Actuarial Science · Probability and systems thinking carries into every technical decision</span>
+    </div>
+    <div class="date">2022</div>
+  </div>
+</section>
+
+</body>
+</html>

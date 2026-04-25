@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Harness Proficiency — Husni Sarafi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0f0f12;
+    --surface: #1a1a1e;
+    --card: #232328;
+    --border: #333338;
+    --text: #e4e4e8;
+    --text-dim: #888890;
+    --accent: #4f8ef7;
+    --green: #4ade80;
+    --amber: #f59e0b;
+    --red: #ef4444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 600px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header h1 span { color: var(--accent); }
+  .header .formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+    background: var(--card);
+    padding: 6px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .chart-container {
+    position: relative;
+    width: 520px;
+    height: 520px;
+    margin-bottom: 40px;
+  }
+
+  canvas {
+    display: block;
+  }
+
+  .tooltip {
+    position: fixed;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    max-width: 320px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 100;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip .tt-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .tooltip .tt-score {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .tooltip .tt-evidence {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .tooltip .tt-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .tooltip .tt-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(79,142,247,0.15);
+  }
+  .card.active {
+    border-color: var(--accent);
+    background: rgba(79,142,247,0.08);
+  }
+  .card .card-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .card .card-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .card .card-score {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .card .card-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .card .card-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+  .card .card-evidence {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .insight {
+    max-width: 700px;
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .insight .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .insight p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .insight p strong { color: var(--accent); }
+
+  .footer {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="formula">H = (E, T, C, S, L, V)</div>
+  <h1>Agent <span>Harness</span> Proficiency</h1>
+  <p>Six canonical components of a production AI agent harness, mapped against my actual experience across RPA, automation, and AI projects.</p>
+</div>
+
+<div class="chart-container">
+  <canvas id="radar" width="520" height="520"></canvas>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<div class="insight">
+  <span class="tag">Key Insight</span>
+  <p>"The model is commodity. <strong>The harness is moat.</strong>" Two teams using the same model can see 60% vs 98% task completion based entirely on harness quality. My RPA background gives me a strong foundation in <strong>Tool Registry</strong> and <strong>Execution Loop</strong> — the components that interface with the real world. The gap is in <strong>Memory</strong> and <strong>Verifier</strong> — which is exactly what I'm building toward with agentic AI.</p>
+</div>
+
+<div class="footer">
+  Based on the LLM Agent Harness Survey (2026) — 110+ papers, 23 systems, 9 open challenges
+</div>
+
+<div class="tooltip" id="tooltip">
+  <div class="tt-name"></div>
+  <div class="tt-score"></div>
+  <div class="tt-evidence"></div>
+  <div class="tt-bar"><div class="tt-bar-fill"></div></div>
+</div>
+
+<script>
+const DATA = [
+  { letter: 'E', name: 'Execution Loop', score: 6, color: '#f59e0b',
+    evidence: 'BluePrism process orchestration, Meeting Min LLM pipeline, Hermes agent workflows',
+    detail: 'Orchestration, reasoning, planning — the "brain" that decides what to do next.' },
+  { letter: 'T', name: 'Tool Registry', score: 8, color: '#4ade80',
+    evidence: 'UiPath, AA, BluePrism, SQL, REST APIs, SAP, IRBM middleware — core strength',
+    detail: 'Tool orchestration, sandboxing, argument validation. How the agent interfaces with the world.' },
+  { letter: 'C', name: 'Context Manager', score: 5, color: '#f59e0b',
+    evidence: 'Whisper + LLM summarization, Hermes context compaction',
+    detail: 'Token management, summarization, active pruning. Controls what the model sees.' },
+  { letter: 'S', name: 'State Store', score: 5, color: '#f59e0b',
+    evidence: 'RPA process states, audit trails, checkpoint patterns',
+    detail: 'Durable state, checkpoint-resume, progress files. Lets the agent pick up where it left off.' },
+  { letter: 'L', name: 'Memory', score: 4, color: '#ef4444',
+    evidence: 'Meeting Min session memory, Hermes persistent memory — still learning',
+    detail: 'Short-term and long-term memory. What the agent remembers across sessions.' },
+  { letter: 'V', name: 'Verifier', score: 4, color: '#ef4444',
+    evidence: 'RPA validation/error handling, LLM guardrails (learning phase)',
+    detail: 'Output checking, safety, guardrails. Catches failures before they propagate.' },
+];
+
+const canvas = document.getElementById('radar');
+const ctx = canvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+canvas.width = 520 * dpr;
+canvas.height = 520 * dpr;
+canvas.style.width = '520px';
+canvas.style.height = '520px';
+ctx.scale(dpr, dpr);
+
+const cx = 260, cy = 260, R = 180;
+const N = DATA.length;
+let hovered = -1;
+let animated = false;
+let animProgress = 0;
+
+function getAngle(i) {
+  return (Math.PI * 2 * i / N) - Math.PI / 2;
+}
+
+function getPoint(i, r) {
+  const a = getAngle(i);
+  return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r };
+}
+
+function draw() {
+  ctx.clearRect(0, 0, 520, 520);
+
+  // Grid circles
+  for (let i = 1; i <= 10; i++) {
+    const r = (R / 10) * i;
+    ctx.beginPath();
+    for (let j = 0; j <= N; j++) {
+      const a = getAngle(j % N);
+      const x = cx + Math.cos(a) * r;
+      const y = cy + Math.sin(a) * r;
+      j === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = i % 5 === 0 ? '#444' : '#2a2a2e';
+    ctx.lineWidth = i % 5 === 0 ? 1 : 0.5;
+    ctx.stroke();
+  }
+
+  // Axis lines
+  for (let i = 0; i < N; i++) {
+    const p = getPoint(i, R);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = '#2a2a2e';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  // Level labels
+  for (let i = 1; i <= 10; i++) {
+    const r = (R / 10) * i;
+    const p = getPoint(0, r);
+    ctx.fillStyle = '#555';
+    ctx.font = '10px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText(i, p.x, p.y - 6);
+  }
+
+  // Data polygon (animated)
+  const progress = animated ? animProgress : 1;
+  ctx.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const idx = i % N;
+    const r = (R / 10) * DATA[idx].score * progress;
+    const p = getPoint(idx, r);
+    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(79, 142, 247, 0.2)';
+  ctx.fill();
+  ctx.strokeStyle = '#4f8ef7';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // Data points + labels
+  for (let i = 0; i < N; i++) {
+    const d = DATA[i];
+    const r = (R / 10) * d.score * progress;
+    const p = getPoint(i, r);
+    const lp = getPoint(i, R + 30);
+
+    // Point
+    const isHovered = hovered === i;
+    const pointR = isHovered ? 10 : 7;
+    
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, pointR, 0, Math.PI * 2);
+    ctx.fillStyle = d.color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Score inside point
+    if (progress >= 1) {
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 11px Inter';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(d.score, p.x, p.y);
+    }
+
+    // Label
+    if (progress >= 1) {
+      const labelR = R + 38;
+      const lp2 = getPoint(i, labelR);
+      
+      ctx.fillStyle = isHovered ? '#fff' : '#ccc';
+      ctx.font = `${isHovered ? '600' : '500'} 12px Inter`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(d.name, lp2.x, lp2.y);
+
+      // Letter badge
+      const badgeY = lp2.y + 16;
+      ctx.fillStyle = d.color + '33';
+      ctx.beginPath();
+      ctx.roundRect(lp2.x - 12, badgeY - 8, 24, 16, 4);
+      ctx.fill();
+      ctx.fillStyle = d.color;
+      ctx.font = 'bold 10px JetBrains Mono, monospace';
+      ctx.fillText(d.letter, lp2.x, badgeY);
+    }
+  }
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+  ctx.fillStyle = '#4f8ef7';
+  ctx.fill();
+}
+
+// Animate on load
+function animateIn() {
+  const start = performance.now();
+  const duration = 1200;
+  animated = true;
+  
+  function frame(now) {
+    const elapsed = now - start;
+    animProgress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    animProgress = 1 - Math.pow(1 - animProgress, 3);
+    draw();
+    if (elapsed < duration) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+// Tooltip
+const tooltip = document.getElementById('tooltip');
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  let found = -1;
+  for (let i = 0; i < N; i++) {
+    const r = (R / 10) * DATA[i].score;
+    const p = getPoint(i, r);
+    const dist = Math.hypot(mx - p.x, my - p.y);
+    if (dist < 20) { found = i; break; }
+  }
+
+  if (found !== hovered) {
+    hovered = found;
+    draw();
+    updateCards();
+
+    if (found >= 0) {
+      const d = DATA[found];
+      tooltip.querySelector('.tt-name').textContent = d.name;
+      tooltip.querySelector('.tt-score').textContent = `${d.score}/10`;
+      tooltip.querySelector('.tt-score').style.color = d.color;
+      tooltip.querySelector('.tt-evidence').textContent = d.detail + '\n\n' + d.evidence;
+      tooltip.querySelector('.tt-bar-fill').style.width = (d.score * 10) + '%';
+      tooltip.querySelector('.tt-bar-fill').style.background = d.color;
+      tooltip.classList.add('visible');
+    } else {
+      tooltip.classList.remove('visible');
+    }
+  }
+
+  if (found >= 0) {
+    tooltip.style.left = (e.clientX + 16) + 'px';
+    tooltip.style.top = (e.clientY - 10) + 'px';
+    // Keep tooltip on screen
+    const tr = tooltip.getBoundingClientRect();
+    if (tr.right > window.innerWidth - 10) {
+      tooltip.style.left = (e.clientX - tr.width - 16) + 'px';
+    }
+    if (tr.bottom > window.innerHeight - 10) {
+      tooltip.style.top = (e.clientY - tr.height - 10) + 'px';
+    }
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hovered = -1;
+  draw();
+  updateCards();
+  tooltip.classList.remove('visible');
+});
+
+// Cards
+const cardsEl = document.getElementById('cards');
+
+function renderCards() {
+  cardsEl.innerHTML = DATA.map((d, i) => `
+    <div class="card" data-idx="${i}">
+      <div class="card-letter">${d.letter}</div>
+      <div class="card-name">${d.name}</div>
+      <div class="card-score" style="color:${d.color}">${d.score}<span style="font-size:14px;color:var(--text-dim)">/10</span></div>
+      <div class="card-bar"><div class="card-bar-fill" style="width:${d.score*10}%;background:${d.color}"></div></div>
+      <div class="card-evidence">${d.evidence}</div>
+    </div>
+  `).join('');
+
+  // Card hover → highlight radar
+  cardsEl.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      hovered = parseInt(card.dataset.idx);
+      draw();
+      updateCards();
+    });
+    card.addEventListener('mouseleave', () => {
+      hovered = -1;
+      draw();
+      updateCards();
+    });
+  });
+}
+
+function updateCards() {
+  cardsEl.querySelectorAll('.card').forEach((card, i) => {
+    card.classList.toggle('active', i === hovered);
+  });
+}
+
+renderCards();
+animateIn();
+</script>
+
+</body>
+</html>

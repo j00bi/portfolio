@@ -1,0 +1,121 @@
+{
+  "name": "Husni Sarafi",
+  "role": "RPA Consultant · Automation Engineer",
+  "summary": "RPA Consultant at EY, managing <span class=\"hl\">BluePrism processes</span> for a national utility provider's billing and metering operations. Three years spanning process delivery, RPA development, and enterprise consulting — started monitoring AutomationAnywhere robots at IBM, became a full RPA builder at E-Outsource, now delivering at scale with BluePrism. Self-taught developer outside work: AI meeting transcription, automotive UI, and smart home automation. Actuarial Science background; thinks in systems and probability. Exploring <span class=\"hl\">agentic AI</span> as the next frontier beyond rule-based automation.",
+  "metrics": [
+    {
+      "value": "3<span class=\"unit\">yrs",
+      "label": "automation & process delivery"
+    },
+    {
+      "value": "50<span class=\"unit\">%",
+      "label": "robot productivity increase"
+    },
+    {
+      "value": "99<span class=\"unit\">%",
+      "label": "live workflow uptime maintained"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Ernst & Young",
+      "kind": "BluePrism · Utility sector",
+      "role": "consultant",
+      "rows": {
+        "Role": "RPA Consultant — Associate, assigned to a national utility provider engagement. Managing and monitoring BluePrism processes across billing and advanced metering infrastructure (AMI) operations.",
+        "Actions": "Handles a portfolio of live BP processes including SMART Meter Billing and AMI data pipelines. Monitors robot health, triages failures, and ensures process stability across high-volume transactional workflows."
+      }
+    },
+    {
+      "company": "E-Outsource Asia",
+      "kind": "UiPath · AutomationAnywhere",
+      "role": "associate consultant",
+      "rows": {
+        "Role": "Associate Consultant — primary RPA developer. End-to-end ownership: process discovery, solution design, development, deployment, and post-launch monitoring across multiple client engagements.",
+        "Actions": "Designed and shipped LOMAS (Logistics Management System) automation — tracking import/export liners, updating shipment plans, integrating SQL databases and APIs into robot workflows. Built e-invoice pipeline extracting data from SAP ERP, transforming to IRBM-mandated format, uploading via middleware. Developed Excel macro scripts for Purchase Order processing with cross-checking against customer records and SAPGUI posting."
+      }
+    },
+    {
+      "company": "IBM Malaysia",
+      "kind": "AutomationAnywhere · Accounts Receivable",
+      "role": "process delivery specialist",
+      "rows": {
+        "Role": "Process Delivery Specialist — Accounts Receivable, serving the Vietnamese market. Initially an end user, then assigned to <span class=\"hl\">monitor live AutomationAnywhere robots</span> supporting the operations team.",
+        "Actions": "Observed how senior developers combined <span class=\"hl\">RPA with Excel macros</span> to automate AR workflows — invoice processing, payment reconciliation, aging reports. Started experimenting with VBA, built scripts that caught the team's attention, and eventually contributed to <span class=\"hl\">live automation development</span>."
+      }
+    }
+  ],
+  "projects": [
+    {
+      "name": "Meeting Min",
+      "tech": "Python · Whisper · Ollama · SSH",
+      "desc": "Self-hosted bilingual meeting minutes bot. Captures audio from Microsoft Teams, pipes through <span class=\"hl\">Whisper</span> for speech-to-text (auto-detects Malay and English), generates structured summaries via LLM. Designed for locked-down corporate environments — audio captured locally, processed on remote server via SSH tunneling."
+    },
+    {
+      "name": "Mazda AIO",
+      "tech": "HTML · CSS · JavaScript · React · Vite",
+      "desc": "Custom speedometer dashboards and instrument cluster UIs for the <span class=\"hl\">Mazda Connect CMU</span> head unit (2015 Mazda 2). Includes real-time driving data visualization and a React multi-screen app prototype. Exploration of embedded systems, CAN bus data, and automotive UI design on production hardware."
+    },
+    {
+      "name": "Yeelight Backlight",
+      "tech": "Python · NumPy · MSS · TCP",
+      "desc": "Real-time monitor ambient lighting — captures screen edges, averages colors, sends commands to a <span class=\"hl\">Yeelight bslamp3</span> over LAN TCP. Iterated through 6 versions solving TCP buffer overflow (threaded sender + drop queue), temporal smoothing, dark mode fallback, and adaptive rate limiting."
+    },
+    {
+      "name": "Celestial Clock",
+      "tech": "HTML Canvas · JavaScript · REST API",
+      "desc": "Full-screen canvas rendering a prayer-synced sky — gradients tied to actual Islamic prayer times (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha) via Aladhan API. Features <span class=\"hl\">sun arc</span>, moon with phase rendering, twinkling stars, and layered mountain silhouettes."
+    },
+    {
+      "name": "Bursa Sector Catalyst",
+      "tech": "Research · Data Analysis",
+      "desc": "Sector-based catalyst analysis model for <span class=\"hl\">Bursa Malaysia</span>. Applies actuarial probability thinking to stock market sector rotation patterns. Early research phase — stalled in favor of active RPA work and AI exploration."
+    }
+  ],
+  "skills": [
+    {
+      "label": "RPA Platforms",
+      "body": "Production experience across <span class=\"em-brand\">BluePrism, UiPath, and AutomationAnywhere</span> — from process discovery to deployment and monitoring at enterprise scale."
+    },
+    {
+      "label": "Integration",
+      "body": "SQL databases, REST APIs, SAP ERP, and IRBM middleware. Built end-to-end pipelines from <span class=\"em-brand\">data extraction through transformation to upload</span>."
+    },
+    {
+      "label": "Languages",
+      "body": "Python, JavaScript, VB.Net, PowerShell, SQL. HTML/CSS/JS for frontend projects. <span class=\"em-brand\">Python</span> is the primary language for personal projects and automation scripting."
+    },
+    {
+      "label": "AI & LLMs",
+      "body": "Whisper STT, Ollama (local LLMs), prompt engineering, bilingual MY/EN NLP pipelines. Running Hermes as <span class=\"em-brand\">daily AI assistant</span> — exploring agentic workflows."
+    },
+    {
+      "label": "Documentation",
+      "body": "SOPs, user guides, FSD, SDD, SIT test scripts, technical READMEs. Quarterly documentation cycles at <span class=\"em-brand\">EOA</span> delivered consistently across engagements."
+    }
+  ],
+  "education": [
+    {
+      "school": "UiTM Shah Alam",
+      "major": "BSc (Hons) Actuarial Science · Probability and systems thinking carries into every technical decision",
+      "date": "2022"
+    }
+  ],
+  "timeline": [
+    {
+      "year": "2023",
+      "head": "RPA seed planted",
+      "body": "IBM — monitored AutomationAnywhere robots, experimented with VBA, contributed to live automation development."
+    },
+    {
+      "year": "2024",
+      "head": "RPA builder",
+      "body": "E-Outsource Asia — flipped to the builder side with UiPath and AutomationAnywhere."
+    },
+    {
+      "year": "2026",
+      "head": "Enterprise consultant",
+      "body": "EY — BluePrism at scale for a major utility provider. Agentic AI interest accelerates."
+    }
+  ]
+}

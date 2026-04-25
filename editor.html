@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kami Resume Editor</title>
+<style>
+  :root {
+    --bg: #1a1a1e;
+    --surface: #232328;
+    --border: #333338;
+    --text: #e4e4e8;
+    --text-dim: #888890;
+    --accent: #4f8ef7;
+    --accent-dim: #3a6bc5;
+    --danger: #e55;
+    --success: #4d4;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    gap: 12px;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .topbar h1 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+  }
+  .topbar h1 span { color: var(--accent); }
+
+  .file-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+  }
+  .file-bar input {
+    flex: 1;
+    padding: 5px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 12px;
+    font-family: var(--mono, monospace);
+    outline: none;
+    min-width: 0;
+  }
+  .file-bar input:focus { border-color: var(--accent); }
+
+  .topbar-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dim); }
+  .btn-secondary { background: var(--border); color: var(--text); }
+  .btn-secondary:hover { background: #444; }
+  .btn-success { background: var(--success); color: #fff; }
+  .btn-success:hover { opacity: 0.85; }
+  .btn-small { padding: 4px 8px; font-size: 11px; }
+
+  .status {
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--bg);
+    white-space: nowrap;
+  }
+  .status.saved { color: var(--success); }
+
+  /* LAYOUT */
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* EDITOR PANEL */
+  .editor-panel {
+    width: 50%;
+    overflow-y: auto;
+    padding: 16px;
+    border-right: 1px solid var(--border);
+  }
+
+  .section { margin-bottom: 20px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .section-header h2 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--accent);
+  }
+  .section-header .arrow {
+    font-size: 10px;
+    color: var(--text-dim);
+    transition: transform 0.2s;
+  }
+  .section.collapsed .section-body { display: none; }
+  .section.collapsed .arrow { transform: rotate(-90deg); }
+
+  .field { margin-bottom: 10px; }
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 7px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+    line-height: 1.5;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .field textarea { min-height: 60px; }
+  .field textarea.tall { min-height: 100px; }
+
+  .field-row { display: flex; gap: 8px; }
+  .field-row .field { flex: 1; }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .metric-card-edit {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px;
+  }
+  .metric-card-edit input {
+    width: 100%;
+    padding: 4px 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 600;
+    outline: none;
+    margin-bottom: 4px;
+  }
+  .metric-card-edit input:focus { border-color: var(--accent); }
+  .metric-card-edit label { font-size: 10px; color: var(--text-dim); }
+
+  .exp-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .exp-block .exp-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .exp-block .exp-title span { color: var(--text-dim); font-weight: 400; }
+  .exp-block .field { margin-bottom: 6px; }
+  .exp-block .field input { font-size: 12px; padding: 5px 8px; }
+  .exp-block .field textarea { min-height: 50px; font-size: 12px; }
+
+  .proj-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  .proj-block .proj-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .proj-block .proj-title span { color: var(--text-dim); font-weight: 400; font-size: 11px; }
+  .proj-block .field { margin-bottom: 6px; }
+  .proj-block .field input, .proj-block .field textarea { font-size: 12px; padding: 5px 8px; }
+  .proj-block .field textarea { min-height: 45px; }
+
+  .skill-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px;
+    margin-bottom: 6px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .skill-block label {
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    width: 90px;
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+  .skill-block input, .skill-block textarea {
+    flex: 1;
+    padding: 5px 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 12px;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+    min-height: 32px;
+  }
+  .skill-block input:focus, .skill-block textarea:focus { border-color: var(--accent); }
+
+  .hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* PREVIEW PANEL */
+  .preview-panel {
+    width: 50%;
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .preview-header {
+    padding: 8px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .preview-frame {
+    flex: 1;
+    border: none;
+    background: #f5f4ed;
+  }
+
+  /* FILE BROWSER MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 550px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .modal-path {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-path input {
+    flex: 1;
+    padding: 6px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 12px;
+    font-family: var(--mono, monospace);
+    outline: none;
+  }
+  .modal-path input:focus { border-color: var(--accent); }
+
+  .modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .modal-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: background 0.1s;
+    font-size: 13px;
+  }
+  .modal-entry:hover { background: rgba(79, 142, 247, 0.1); }
+  .modal-entry .icon { font-size: 14px; width: 20px; text-align: center; }
+  .modal-entry .icon.dir { color: var(--accent); }
+  .modal-entry .icon.file { color: var(--text-dim); }
+  .modal-entry .name { flex: 1; }
+  .modal-entry.dir .name { color: var(--accent); font-weight: 500; }
+  .modal-entry.file .name { color: var(--text); }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    background: var(--success);
+    color: #fff;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 300;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.error { background: var(--danger); }
+
+  .editor-panel::-webkit-scrollbar { width: 6px; }
+  .editor-panel::-webkit-scrollbar-track { background: transparent; }
+  .editor-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .modal-body::-webkit-scrollbar { width: 6px; }
+  .modal-body::-webkit-scrollbar-track { background: transparent; }
+  .modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TOP BAR ═══════════ -->
+<div class="topbar">
+  <div class="topbar-left">
+    <h1><span>Kami</span> Resume Editor</h1>
+  </div>
+  <div class="file-bar">
+    <input id="file-path" placeholder="File path..." />
+    <button class="btn btn-secondary btn-small" onclick="openFile()">📂 Open</button>
+    <button class="btn btn-secondary btn-small" onclick="openBrowser()">Browse</button>
+  </div>
+  <div class="topbar-actions">
+    <span class="status" id="status">Unsaved</span>
+    <button class="btn btn-secondary" onclick="loadData()">↺ Reload</button>
+    <button class="btn btn-primary" onclick="saveData()">Save</button>
+    <button class="btn btn-secondary" onclick="saveAsDialog()">Save As…</button>
+    <button class="btn btn-success" onclick="exportPDF()">↓ PDF</button>
+  </div>
+</div>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div class="main">
+  <div class="editor-panel" id="editor">
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Header</h2>
+      </div>
+      <div class="section-body">
+        <div class="field"><label>Name</label><input id="f-name" /></div>
+        <div class="field"><label>Role / Tagline</label><input id="f-role" /></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Metrics</h2>
+      </div>
+      <div class="section-body">
+        <div class="metric-row" id="metrics-container"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Summary</h2>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <textarea id="f-summary" class="tall"></textarea>
+          <div class="hint">Use &lt;span class="hl"&gt;text&lt;/span&gt; for blue highlights</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Timeline</h2>
+      </div>
+      <div class="section-body" id="timeline-container"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Experience</h2>
+      </div>
+      <div class="section-body" id="experience-container"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Projects</h2>
+      </div>
+      <div class="section-body" id="projects-container"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Skills</h2>
+      </div>
+      <div class="section-body" id="skills-container"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="arrow">▼</span><h2>Education</h2>
+      </div>
+      <div class="section-body" id="education-container"></div>
+    </div>
+
+  </div>
+
+  <div class="preview-panel">
+    <div class="preview-header">Live Preview</div>
+    <iframe class="preview-frame" id="preview"></iframe>
+  </div>
+</div>
+
+<!-- ═══════════ FILE BROWSER MODAL ═══════════ -->
+<div class="modal-overlay" id="browser-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📂 Open Resume</h3>
+      <button class="modal-close" onclick="closeBrowser()">✕</button>
+    </div>
+    <div class="modal-path">
+      <input id="browser-path" placeholder="Directory path..." onkeydown="if(event.key==='Enter')navigateDir(this.value)" />
+      <button class="btn btn-secondary btn-small" onclick="navigateDir(document.getElementById('browser-path').value)">Go</button>
+    </div>
+    <div class="modal-body" id="browser-list"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeBrowser()">Cancel</button>
+      <button class="btn btn-primary" id="browser-open-btn" onclick="openSelected()" disabled>Open</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SAVE AS MODAL ═══════════ -->
+<div class="modal-overlay" id="saveas-modal">
+  <div class="modal" style="width:450px">
+    <div class="modal-header">
+      <h3>💾 Save As</h3>
+      <button class="modal-close" onclick="closeSaveAs()">✕</button>
+    </div>
+    <div class="modal-path">
+      <input id="saveas-path" placeholder="Full path to save as..." onkeydown="if(event.key==='Enter')doSaveAs()" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeSaveAs()">Cancel</button>
+      <button class="btn btn-primary" onclick="doSaveAs()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let currentData = null;
+let selectedFile = null;
+
+function toggleSection(header) {
+  header.parentElement.classList.toggle('collapsed');
+}
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function setStatus(text, cls) {
+  const s = document.getElementById('status');
+  s.textContent = text;
+  s.className = 'status ' + (cls || '');
+}
+
+// ── File Operations ──
+
+function openFile() {
+  const path = document.getElementById('file-path').value.trim();
+  if (!path) { showToast('Enter a file path first', true); return; }
+  loadFromPath(path);
+}
+
+async function loadFromPath(path) {
+  try {
+    const res = await fetch('/api/open', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path }),
+    });
+    const result = await res.json();
+    if (result.error) {
+      showToast(result.error, true);
+      return;
+    }
+    currentData = result.data;
+    document.getElementById('file-path').value = result.file;
+    renderAll();
+    updatePreview();
+    setStatus('Loaded', 'saved');
+    showToast('Opened: ' + result.file.split('/').pop());
+  } catch (e) {
+    showToast('Failed to load: ' + e.message, true);
+  }
+}
+
+// ── File Browser ──
+
+function openBrowser() {
+  document.getElementById('browser-modal').classList.add('open');
+  selectedFile = null;
+  document.getElementById('browser-open-btn').disabled = true;
+  // Start from current file's directory or portfolio dir
+  const currentPath = document.getElementById('file-path').value;
+  const dir = currentPath ? currentPath.substring(0, currentPath.lastIndexOf('/')) : '/mnt/c/Users/User/OneDrive/Documents/Claude/Claude/projects/portfolio';
+  navigateDir(dir);
+}
+
+function closeBrowser() {
+  document.getElementById('browser-modal').classList.remove('open');
+}
+
+async function navigateDir(dirpath) {
+  try {
+    const res = await fetch('/api/list-dir', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: dirpath }),
+    });
+    const result = await res.json();
+    if (result.error) { showToast(result.error, true); return; }
+
+    document.getElementById('browser-path').value = result.dir;
+    const list = document.getElementById('browser-list');
+    let html = '';
+
+    // Parent directory
+    if (result.parent && result.parent !== result.dir) {
+      html += `<div class="modal-entry dir" onclick="navigateDir('${esc(result.parent)}')">
+        <span class="icon dir">⬆</span><span class="name">..</span></div>`;
+    }
+
+    for (const entry of result.entries) {
+      if (entry.type === 'dir') {
+        html += `<div class="modal-entry dir" onclick="navigateDir('${esc(entry.path)}')">
+          <span class="icon dir">📁</span><span class="name">${esc(entry.name)}</span></div>`;
+      } else {
+        html += `<div class="modal-entry file" onclick="selectFile(this, '${esc(entry.path)}')">
+          <span class="icon file">📄</span><span class="name">${esc(entry.name)}</span></div>`;
+      }
+    }
+
+    if (!result.entries.length) {
+      html = '<div style="padding:16px;color:var(--text-dim);text-align:center">No .html files here</div>';
+    }
+
+    list.innerHTML = html;
+  } catch (e) {
+    showToast('Browse failed: ' + e.message, true);
+  }
+}
+
+function selectFile(el, path) {
+  document.querySelectorAll('.modal-entry').forEach(e => e.style.background = '');
+  el.style.background = 'rgba(79,142,247,0.15)';
+  selectedFile = path;
+  document.getElementById('browser-open-btn').disabled = false;
+}
+
+function openSelected() {
+  if (!selectedFile) return;
+  closeBrowser();
+  loadFromPath(selectedFile);
+}
+
+// ── Save As ──
+
+function saveAsDialog() {
+  const current = document.getElementById('file-path').value;
+  document.getElementById('saveas-path').value = current || '';
+  document.getElementById('saveas-modal').classList.add('open');
+}
+
+function closeSaveAs() {
+  document.getElementById('saveas-modal').classList.remove('open');
+}
+
+async function doSaveAs() {
+  const path = document.getElementById('saveas-path').value.trim();
+  if (!path) { showToast('Enter a path', true); return; }
+  const data = collectData();
+  try {
+    const res = await fetch('/api/save-as', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data, path }),
+    });
+    const result = await res.json();
+    if (result.error) { showToast(result.error, true); return; }
+    document.getElementById('file-path').value = result.file;
+    setStatus('Saved ✓', 'saved');
+    showToast('Saved to ' + result.file.split('/').pop());
+    closeSaveAs();
+  } catch (e) {
+    showToast('Save failed: ' + e.message, true);
+  }
+}
+
+// ── Render ──
+
+function renderMetrics(data) {
+  const c = document.getElementById('metrics-container');
+  c.innerHTML = data.metrics.map((m, i) => `
+    <div class="metric-card-edit">
+      <input value="${esc(m.value)}" data-metric="${i}" data-field="value" oninput="markDirty()" />
+      <label>${esc(m.label)}</label>
+    </div>`).join('');
+}
+
+function renderTimeline(data) {
+  const c = document.getElementById('timeline-container');
+  c.innerHTML = data.timeline.map((t, i) => `
+    <div class="exp-block">
+      <div class="exp-title">Step ${i + 1}</div>
+      <div class="field"><label>Year</label>
+        <input value="${esc(t.year)}" data-tl="${i}" data-field="year" oninput="markDirty()" /></div>
+      <div class="field"><label>Headline</label>
+        <input value="${esc(t.head)}" data-tl="${i}" data-field="head" oninput="markDirty()" /></div>
+      <div class="field"><label>Body</label>
+        <textarea data-tl="${i}" data-field="body" oninput="markDirty()">${esc(t.body)}</textarea></div>
+    </div>`).join('');
+}
+
+function renderExperience(data) {
+  const c = document.getElementById('experience-container');
+  c.innerHTML = data.experience.map((exp, i) => {
+    const rows = Object.entries(exp.rows || {});
+    return `
+    <div class="exp-block">
+      <div class="exp-title">${esc(exp.company)} <span>· ${esc(exp.kind)}</span></div>
+      <div class="field-row">
+        <div class="field"><label>Company</label>
+          <input value="${esc(exp.company)}" data-exp="${i}" data-field="company" oninput="markDirty()" /></div>
+        <div class="field"><label>Kind</label>
+          <input value="${esc(exp.kind)}" data-exp="${i}" data-field="kind" oninput="markDirty()" /></div>
+        <div class="field"><label>Role tag</label>
+          <input value="${esc(exp.role)}" data-exp="${i}" data-field="role" oninput="markDirty()" /></div>
+      </div>
+      ${rows.map(([label, text]) => `
+      <div class="field"><label>${esc(label)}</label>
+        <textarea data-exp="${i}" data-row="${esc(label)}" oninput="markDirty()">${esc(text)}</textarea></div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+function renderProjects(data) {
+  const c = document.getElementById('projects-container');
+  c.innerHTML = data.projects.map((p, i) => `
+    <div class="proj-block">
+      <div class="proj-title">${esc(p.name)} <span>· ${esc(p.tech)}</span></div>
+      <div class="field-row">
+        <div class="field"><label>Name</label>
+          <input value="${esc(p.name)}" data-proj="${i}" data-field="name" oninput="markDirty()" /></div>
+        <div class="field"><label>Tech</label>
+          <input value="${esc(p.tech)}" data-proj="${i}" data-field="tech" oninput="markDirty()" /></div>
+      </div>
+      <div class="field"><label>Description</label>
+        <textarea data-proj="${i}" data-field="desc" oninput="markDirty()">${esc(p.desc)}</textarea>
+        <div class="hint">Use &lt;span class="hl"&gt;text&lt;/span&gt; for blue highlights</div></div>
+    </div>`).join('');
+}
+
+function renderSkills(data) {
+  const c = document.getElementById('skills-container');
+  c.innerHTML = data.skills.map((s, i) => `
+    <div class="skill-block">
+      <label>${esc(s.label)}</label>
+      <textarea data-skill="${i}" data-field="label" oninput="markDirty()" rows="1">${esc(s.label)}</textarea>
+      <textarea data-skill="${i}" data-field="body" oninput="markDirty()">${esc(s.body)}</textarea>
+    </div>`).join('');
+}
+
+function renderEducation(data) {
+  const c = document.getElementById('education-container');
+  c.innerHTML = data.education.map((e, i) => `
+    <div class="exp-block">
+      <div class="field-row">
+        <div class="field"><label>School</label>
+          <input value="${esc(e.school)}" data-edu="${i}" data-field="school" oninput="markDirty()" /></div>
+        <div class="field"><label>Date</label>
+          <input value="${esc(e.date)}" data-edu="${i}" data-field="date" oninput="markDirty()" /></div>
+      </div>
+      <div class="field"><label>Major / Details</label>
+        <textarea data-edu="${i}" data-field="major" oninput="markDirty()">${esc(e.major)}</textarea></div>
+    </div>`).join('');
+}
+
+function renderAll() {
+  document.getElementById('f-name').value = currentData.name;
+  document.getElementById('f-role').value = currentData.role;
+  document.getElementById('f-summary').value = currentData.summary;
+  renderMetrics(currentData);
+  renderTimeline(currentData);
+  renderExperience(currentData);
+  renderProjects(currentData);
+  renderSkills(currentData);
+  renderEducation(currentData);
+}
+
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function collectData() {
+  return {
+    name: document.getElementById('f-name').value,
+    role: document.getElementById('f-role').value,
+    summary: document.getElementById('f-summary').value,
+    metrics: currentData.metrics,
+    timeline: currentData.timeline.map((t, i) => ({
+      year: document.querySelector(`[data-tl="${i}"][data-field="year"]`)?.value || t.year,
+      head: document.querySelector(`[data-tl="${i}"][data-field="head"]`)?.value || t.head,
+      body: document.querySelector(`[data-tl="${i}"][data-field="body"]`)?.value || t.body,
+    })),
+    experience: currentData.experience.map((exp, i) => {
+      const rows = {};
+      Object.keys(exp.rows || {}).forEach(label => {
+        const el = document.querySelector(`[data-exp="${i}"][data-row="${CSS.escape(label)}"]`);
+        if (el) rows[label] = el.value;
+      });
+      return {
+        company: document.querySelector(`[data-exp="${i}"][data-field="company"]`)?.value || exp.company,
+        kind: document.querySelector(`[data-exp="${i}"][data-field="kind"]`)?.value || exp.kind,
+        role: document.querySelector(`[data-exp="${i}"][data-field="role"]`)?.value || exp.role,
+        rows,
+      };
+    }),
+    projects: currentData.projects.map((p, i) => ({
+      name: document.querySelector(`[data-proj="${i}"][data-field="name"]`)?.value || p.name,
+      tech: document.querySelector(`[data-proj="${i}"][data-field="tech"]`)?.value || p.tech,
+      desc: document.querySelector(`[data-proj="${i}"][data-field="desc"]`)?.value || p.desc,
+    })),
+    skills: currentData.skills.map((s, i) => ({
+      label: document.querySelector(`[data-skill="${i}"][data-field="label"]`)?.value || s.label,
+      body: document.querySelector(`[data-skill="${i}"][data-field="body"]`)?.value || s.body,
+    })),
+    education: currentData.education.map((e, i) => ({
+      school: document.querySelector(`[data-edu="${i}"][data-field="school"]`)?.value || e.school,
+      major: document.querySelector(`[data-edu="${i}"][data-field="major"]`)?.value || e.major,
+      date: document.querySelector(`[data-edu="${i}"][data-field="date"]`)?.value || e.date,
+    })),
+  };
+}
+
+function markDirty() { setStatus('Unsaved', ''); }
+
+let previewTimer;
+function updatePreview() {
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(async () => {
+    const data = collectData();
+    const res = await fetch('/api/preview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const html = await res.text();
+    const iframe = document.getElementById('preview');
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open();
+    doc.write(html);
+    doc.close();
+  }, 600);
+}
+
+async function loadData() {
+  const res = await fetch('/api/data');
+  currentData = await res.json();
+  // Also load the current file path
+  const fres = await fetch('/api/current-file');
+  const fdata = await fres.json();
+  document.getElementById('file-path').value = fdata.file;
+  renderAll();
+  updatePreview();
+  setStatus('Loaded', 'saved');
+}
+
+async function saveData() {
+  const data = collectData();
+  const res = await fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const result = await res.json();
+  if (result.ok) {
+    setStatus('Saved ✓', 'saved');
+    showToast('Saved to resume.html');
+    updatePreview();
+  }
+}
+
+async function exportPDF() {
+  setStatus('Generating PDF...', '');
+  const data = collectData();
+  const res = await fetch('/api/pdf', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Husni_Sarafi_Resume.pdf';
+  a.click();
+  URL.revokeObjectURL(url);
+  setStatus('PDF exported ✓', 'saved');
+  showToast('PDF downloaded');
+}
+
+// Live preview on edit
+document.getElementById('editor').addEventListener('input', () => {
+  markDirty();
+  updatePreview();
+});
+
+// Close modals on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeBrowser();
+    closeSaveAs();
+  }
+});
+
+// Init
+loadData();
+</script>
+
+</body>
+</html>
