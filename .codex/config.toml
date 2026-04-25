@@ -1,0 +1,31 @@
+# Codex CLI — Portfolio project configuration
+# Personal overrides go in ~/.codex/config.toml
+
+################################################################################
+# Core Settings
+################################################################################
+
+model = "o4-mini"
+
+# Sandbox: workspace-write lets Codex edit files in the project
+sandbox_mode = "workspace-write"
+
+# Approval: on-request asks before running commands, never for file edits
+approval_policy = "on-request"
+
+################################################################################
+# MCP Servers
+################################################################################
+
+[mcp_servers.context7]
+enabled = true
+command = "npx"
+args = ["-y", "@upstash/context7-mcp@latest"]
+
+################################################################################
+# Project Trust
+################################################################################
+
+# Mark this project as trusted for faster iteration
+[projects."."]
+trust_level = "trusted"
