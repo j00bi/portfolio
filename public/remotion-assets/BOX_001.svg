@@ -1,0 +1,29 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="edge" x1="176" y1="124" x2="1028" y2="596" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6C63FF"/>
+      <stop offset="1" stop-color="#00D4FF"/>
+    </linearGradient>
+    <filter id="halo" x="48" y="32" width="1104" height="656" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+  <rect x="168" y="116" width="864" height="488" rx="28" fill="url(#edge)" fill-opacity="0.1"/>
+  <rect x="168" y="116" width="864" height="488" rx="28" stroke="url(#edge)" stroke-width="3"/>
+  <rect x="168" y="116" width="864" height="488" rx="28" stroke="url(#edge)" stroke-width="10" opacity="0.22" filter="url(#halo)"/>
+  <path d="M148 176V116H208" stroke="#00D4FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M992 116H1052V176" stroke="#6C63FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1052 544V604H992" stroke="#00D4FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M208 604H148V544" stroke="#6C63FF" stroke-width="8" stroke-linecap="round"/>
+  <g opacity="0.16" stroke="#F0F0FF">
+    <line x1="240" y1="212" x2="960" y2="212"/>
+    <line x1="240" y1="292" x2="960" y2="292"/>
+    <line x1="240" y1="372" x2="960" y2="372"/>
+    <line x1="240" y1="452" x2="960" y2="452"/>
+    <line x1="240" y1="532" x2="960" y2="532"/>
+    <line x1="320" y1="160" x2="320" y2="560"/>
+    <line x1="480" y1="160" x2="480" y2="560"/>
+    <line x1="640" y1="160" x2="640" y2="560"/>
+    <line x1="800" y1="160" x2="800" y2="560"/>
+  </g>
+</svg>

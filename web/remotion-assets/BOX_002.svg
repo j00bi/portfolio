@@ -1,0 +1,18 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="edge" x1="228" y1="164" x2="900" y2="554" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6C63FF"/>
+      <stop offset="1" stop-color="#00D4FF"/>
+    </linearGradient>
+    <filter id="glow" x="120" y="96" width="960" height="552" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+  <g opacity="0.34">
+    <rect x="308" y="182" width="500" height="312" rx="24" transform="rotate(-10 308 182)" fill="#0D0D1A" stroke="url(#edge)" stroke-width="3"/>
+    <rect x="404" y="246" width="500" height="312" rx="24" transform="rotate(2 404 246)" fill="#0D0D1A" stroke="url(#edge)" stroke-width="3"/>
+  </g>
+  <rect x="268" y="208" width="572" height="356" rx="28" transform="rotate(-4 268 208)" fill="#0D0D1A"/>
+  <rect x="268" y="208" width="572" height="356" rx="28" transform="rotate(-4 268 208)" stroke="url(#edge)" stroke-width="3"/>
+  <rect x="268" y="208" width="572" height="356" rx="28" transform="rotate(-4 268 208)" stroke="url(#edge)" stroke-width="12" opacity="0.18" filter="url(#glow)"/>
+</svg>

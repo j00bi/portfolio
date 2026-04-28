@@ -1,0 +1,52 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 214) rotate(90) scale(514 968)">
+      <stop offset="0" stop-color="#FFFDF9"/>
+      <stop offset="0.44" stop-color="#F7F4EE"/>
+      <stop offset="1" stop-color="#EAE5DC"/>
+    </radialGradient>
+    <linearGradient id="backWall" x1="960" y1="54" x2="960" y2="726" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFDF9"/>
+      <stop offset="0.62" stop-color="#F6F2EB"/>
+      <stop offset="1" stop-color="#EFE9E1"/>
+    </linearGradient>
+    <linearGradient id="floorPlane" x1="960" y1="676" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F1ECE4"/>
+      <stop offset="0.48" stop-color="#E6E0D7"/>
+      <stop offset="1" stop-color="#D8D1C7"/>
+    </linearGradient>
+    <radialGradient id="spotlight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 184) rotate(90) scale(292 602)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.98"/>
+      <stop offset="0.42" stop-color="#FFFDF8" stop-opacity="0.74"/>
+      <stop offset="1" stop-color="#FFFDF8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="curveShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 706) rotate(90) scale(152 850)">
+      <stop offset="0" stop-color="#D8D2C8" stop-opacity="0.48"/>
+      <stop offset="0.35" stop-color="#E1DBD1" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#EDE8DF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floorBloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 788) rotate(90) scale(214 732)">
+      <stop offset="0" stop-color="#FFFDF8" stop-opacity="0.62"/>
+      <stop offset="0.36" stop-color="#FBF7F0" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FBF7F0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floorShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 850) rotate(90) scale(110 454)">
+      <stop offset="0" stop-color="#C8C0B3" stop-opacity="0.4"/>
+      <stop offset="0.34" stop-color="#D8D0C4" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#E7E0D5" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blurHeavy" x="-120" y="-120" width="2160" height="1320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="blurSoft" x="298" y="618" width="1324" height="334" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bgGlow)"/>
+  <path d="M0 0H1920V706C1920 717.046 1911.05 726 1900 726H20C8.95431 726 0 717.046 0 706V0Z" fill="url(#backWall)"/>
+  <ellipse cx="960" cy="228" rx="460" ry="244" fill="url(#spotlight)" filter="url(#blurHeavy)"/>
+  <path d="M0 676C0 647.281 23.2812 624 52 624H1868C1896.72 624 1920 647.281 1920 676V1080H0V676Z" fill="url(#floorPlane)"/>
+  <ellipse cx="960" cy="708" rx="754" ry="118" fill="url(#curveShadow)" filter="url(#blurSoft)"/>
+  <ellipse cx="960" cy="794" rx="644" ry="148" fill="url(#floorBloom)"/>
+  <ellipse cx="960" cy="856" rx="360" ry="74" fill="url(#floorShadow)" filter="url(#blurSoft)"/>
+</svg>

@@ -1,0 +1,45 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="holdSkinLeft" x1="354" y1="438" x2="640" y2="1114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7E6DB"/>
+      <stop offset="0.38" stop-color="#E7C7B6"/>
+      <stop offset="1" stop-color="#C89F88"/>
+    </linearGradient>
+    <linearGradient id="holdSkinRight" x1="1246" y1="438" x2="960" y2="1114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7E6DB"/>
+      <stop offset="0.38" stop-color="#E7C7B6"/>
+      <stop offset="1" stop-color="#C89F88"/>
+    </linearGradient>
+    <linearGradient id="holdHighlightLeft" x1="444" y1="516" x2="670" y2="1002" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF8F2" stop-opacity="0.84"/>
+      <stop offset="0.34" stop-color="#FFF8F2" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FFF8F2" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="holdHighlightRight" x1="1156" y1="516" x2="930" y2="1002" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF8F2" stop-opacity="0.84"/>
+      <stop offset="0.34" stop-color="#FFF8F2" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FFF8F2" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="holdShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 1022) rotate(90) scale(112 356)">
+      <stop offset="0" stop-color="#B39380" stop-opacity="0.18"/>
+      <stop offset="0.4" stop-color="#C4A99A" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#E2D3C8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="800" cy="1022" rx="292" ry="96" fill="url(#holdShadow)"/>
+
+  <g>
+    <path d="M422 1184C376 1156 343 1122 323 1082C304 1044 292 1001 287 954C281 902 282 847 288 790C294 735 294 681 286 628C281 590 286 558 302 534C319 510 345 496 382 492C420 488 454 498 485 520C519 544 546 574 566 610C585 643 600 684 611 732C622 779 641 822 668 860C686 886 710 906 742 920C760 928 771 942 776 963C781 985 777 1006 764 1027C751 1047 730 1063 701 1074C666 1088 624 1098 575 1102C544 1105 522 1120 507 1146C492 1170 464 1183 422 1184Z" fill="url(#holdSkinLeft)"/>
+    <path d="M499 476C531 474 561 485 589 508C618 531 642 563 661 603C680 643 697 675 712 698C725 718 745 731 772 737C790 742 801 753 806 771C811 790 808 807 797 822C785 838 767 848 742 853C704 860 671 851 643 827C618 805 596 771 577 725C558 679 535 643 510 618C484 593 454 582 420 585C404 586 392 581 384 570C376 559 374 545 378 528C385 497 405 480 439 478C458 476 478 475 499 476Z" fill="url(#holdHighlightLeft)"/>
+    <path d="M688 720C698 703 717 692 744 688C772 684 795 689 812 700C827 710 835 726 835 747C835 765 827 779 811 788C794 797 772 800 745 798C718 795 699 785 689 768C682 755 681 739 688 720Z" fill="#E8C7B7"/>
+    <path d="M529 850C551 828 572 820 593 825C612 830 624 844 631 867C637 889 634 912 623 935C611 958 592 972 566 978C540 984 515 978 491 959C476 946 468 930 468 911C469 890 489 870 529 850Z" fill="#D7AC96" fill-opacity="0.56"/>
+  </g>
+
+  <g>
+    <path d="M1178 1184C1224 1156 1257 1122 1277 1082C1296 1044 1308 1001 1313 954C1319 902 1318 847 1312 790C1306 735 1306 681 1314 628C1319 590 1314 558 1298 534C1281 510 1255 496 1218 492C1180 488 1146 498 1115 520C1081 544 1054 574 1034 610C1015 643 1000 684 989 732C978 779 959 822 932 860C914 886 890 906 858 920C840 928 829 942 824 963C819 985 823 1006 836 1027C849 1047 870 1063 899 1074C934 1088 976 1098 1025 1102C1056 1105 1078 1120 1093 1146C1108 1170 1136 1183 1178 1184Z" fill="url(#holdSkinRight)"/>
+    <path d="M1101 476C1069 474 1039 485 1011 508C982 531 958 563 939 603C920 643 903 675 888 698C875 718 855 731 828 737C810 742 799 753 794 771C789 790 792 807 803 822C815 838 833 848 858 853C896 860 929 851 957 827C982 805 1004 771 1023 725C1042 679 1065 643 1090 618C1116 593 1146 582 1180 585C1196 586 1208 581 1216 570C1224 559 1226 545 1222 528C1215 497 1195 480 1161 478C1142 476 1122 475 1101 476Z" fill="url(#holdHighlightRight)"/>
+    <path d="M912 720C902 703 883 692 856 688C828 684 805 689 788 700C773 710 765 726 765 747C765 765 773 779 789 788C806 797 828 800 855 798C882 795 901 785 911 768C918 755 919 739 912 720Z" fill="#E8C7B7"/>
+    <path d="M1071 850C1049 828 1028 820 1007 825C988 830 976 844 969 867C963 889 966 912 977 935C989 958 1008 972 1034 978C1060 984 1085 978 1109 959C1124 946 1132 930 1132 911C1131 890 1111 870 1071 850Z" fill="#D7AC96" fill-opacity="0.56"/>
+  </g>
+</svg>

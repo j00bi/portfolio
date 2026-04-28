@@ -1,0 +1,15 @@
+<svg width="520" height="520" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shard" x1="108" y1="70" x2="412" y2="432" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00D4FF"/>
+      <stop offset="1" stop-color="#6C63FF"/>
+    </linearGradient>
+    <filter id="halo" x="20" y="20" width="480" height="480" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <path d="M236 44L404 106L460 262L358 452L146 478L64 254L136 112L236 44Z" fill="#C7F5FF" fill-opacity="0.12"/>
+  <path d="M236 44L404 106L460 262L358 452L146 478L64 254L136 112L236 44Z" stroke="url(#shard)" stroke-width="6"/>
+  <path d="M236 44L404 106L460 262L358 452L146 478L64 254L136 112L236 44Z" stroke="url(#shard)" stroke-width="18" opacity="0.22" filter="url(#halo)"/>
+  <path d="M236 44L404 106L460 262L358 452L146 478L64 254L136 112L236 44Z" fill="url(#shard)" fill-opacity="0.06"/>
+</svg>

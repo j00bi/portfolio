@@ -1,0 +1,70 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="frontMetal" x1="800" y1="166" x2="800" y2="1034" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C9C6C0"/>
+      <stop offset="0.18" stop-color="#F4F1EC"/>
+      <stop offset="0.48" stop-color="#A9A59F"/>
+      <stop offset="0.82" stop-color="#F1EEE8"/>
+      <stop offset="1" stop-color="#C2BEB7"/>
+    </linearGradient>
+    <linearGradient id="frontGlass" x1="800" y1="214" x2="800" y2="986" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#202126"/>
+      <stop offset="0.16" stop-color="#111216"/>
+      <stop offset="0.62" stop-color="#07080C"/>
+      <stop offset="1" stop-color="#020307"/>
+    </linearGradient>
+    <radialGradient id="screenBloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 266) rotate(90) scale(200 420)">
+      <stop offset="0" stop-color="#3C414E" stop-opacity="0.42"/>
+      <stop offset="0.56" stop-color="#1A1D24" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0B0C10" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frameEdge" x1="800" y1="166" x2="800" y2="1034" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="0.22" stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="0.82" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="glassEdge" x1="800" y1="214" x2="800" y2="986" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="0.24" stop-color="#FFFFFF" stop-opacity="0.06"/>
+      <stop offset="0.76" stop-color="#FFFFFF" stop-opacity="0.03"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.16"/>
+    </linearGradient>
+    <radialGradient id="floorShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(802 1034) rotate(90) scale(90 274)">
+      <stop offset="0" stop-color="#645F58" stop-opacity="0.34"/>
+      <stop offset="0.44" stop-color="#8A847B" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#B4ADA3" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadowBlur" x="438" y="890" width="728" height="288" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+    <filter id="deviceShadow" x="506" y="124" width="588" height="988" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.07 0 0 0 0 0.07 0 0 0 0 0.09 0 0 0 0.22 0"/>
+      <feBlend in2="SourceGraphic" result="shape"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadowBlur)">
+    <ellipse cx="802" cy="1034" rx="240" ry="56" fill="url(#floorShadow)"/>
+  </g>
+
+  <g filter="url(#deviceShadow)">
+    <rect x="562" y="166" width="476" height="868" rx="118" fill="url(#frontMetal)"/>
+    <rect x="574" y="178" width="452" height="844" rx="108" stroke="url(#frameEdge)" stroke-width="2"/>
+    <rect x="606" y="214" width="388" height="772" rx="86" fill="url(#frontGlass)"/>
+    <rect x="607.5" y="215.5" width="385" height="769" rx="84.5" stroke="url(#glassEdge)" stroke-width="3"/>
+    <rect x="717" y="244" width="166" height="38" rx="19" fill="#07080C"/>
+    <rect x="758" y="255" width="84" height="16" rx="8" fill="#12141A"/>
+    <circle cx="714" cy="263" r="6" fill="#13151B"/>
+    <circle cx="714" cy="263" r="2.4" fill="#2E3440"/>
+    <path d="M638 284C638 260.804 656.804 242 680 242H722C728.627 242 734 247.373 734 254C734 267.255 723.255 278 710 278H644C640.686 278 638 280.686 638 284V284Z" fill="#FFFFFF" fill-opacity="0.06"/>
+    <ellipse cx="800" cy="330" rx="182" ry="112" fill="url(#screenBloom)"/>
+    <path d="M950 260C965.464 260 978 272.536 978 288V804C978 900.65 899.65 979 803 979H797C700.35 979 622 900.65 622 804V288C622 272.536 634.536 260 650 260H950Z" fill="url(#screenBloom)" fill-opacity="0.18"/>
+    <rect x="1011" y="398" width="6" height="116" rx="3" fill="#B7B2AA"/>
+    <rect x="1011" y="536" width="6" height="74" rx="3" fill="#B7B2AA"/>
+    <rect x="583" y="364" width="6" height="122" rx="3" fill="#F5F2ED" fill-opacity="0.86"/>
+    <path d="M630 228C630 210.327 644.327 196 662 196H830C842.15 196 852 205.85 852 218V218C852 230.15 842.15 240 830 240H642C635.373 240 630 234.627 630 228V228Z" fill="#FFFFFF" fill-opacity="0.08"/>
+  </g>
+</svg>

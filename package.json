@@ -1,0 +1,25 @@
+{
+  "name": "husni-portfolio-remotion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "remotion": "remotion studio src/remotion/index.ts"
+  },
+  "dependencies": {
+    "@remotion/player": "latest",
+    "@vitejs/plugin-react": "latest",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.451",
+    "playwright": "^1.59.1"
+  }
+}

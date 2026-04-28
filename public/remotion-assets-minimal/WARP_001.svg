@@ -1,0 +1,47 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="warpMain" x1="244" y1="450" x2="1356" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="0.82" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="warpCore" x1="360" y1="450" x2="1240" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F5F1EA" stop-opacity="0"/>
+      <stop offset="0.24" stop-color="#FFFDF8" stop-opacity="0.62"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="0.76" stop-color="#FFFDF8" stop-opacity="0.62"/>
+      <stop offset="1" stop-color="#F5F1EA" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="warpBloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 450) rotate(90) scale(210 556)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="0.34" stop-color="#FFFDF8" stop-opacity="0.54"/>
+      <stop offset="0.72" stop-color="#F7F2EA" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#F7F2EA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warpHalo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 450) rotate(90) scale(278 642)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.36"/>
+      <stop offset="0.58" stop-color="#FFFFFF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="warpBlurHeavy" x="98" y="118" width="1404" height="664" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="56"/>
+    </filter>
+    <filter id="warpBlurSoft" x="206" y="250" width="1188" height="400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#warpBlurHeavy)">
+    <path d="M266 450C436 338 610 282 800 282C990 282 1164 338 1334 450C1164 562 990 618 800 618C610 618 436 562 266 450Z" fill="url(#warpHalo)"/>
+  </g>
+
+  <g filter="url(#warpBlurSoft)">
+    <path d="M292 450C454 354 620 308 800 308C980 308 1146 354 1308 450C1146 546 980 592 800 592C620 592 454 546 292 450Z" fill="url(#warpBloom)"/>
+  </g>
+
+  <path d="M244 450C418 366 598 326 800 326C1002 326 1182 366 1356 450C1182 534 1002 574 800 574C598 574 418 534 244 450Z" fill="url(#warpMain)"/>
+  <path d="M360 450C492 394 632 368 800 368C968 368 1108 394 1240 450C1108 506 968 532 800 532C632 532 492 506 360 450Z" fill="url(#warpCore)"/>
+  <path d="M510 450C592 422 684 410 800 410C916 410 1008 422 1090 450C1008 478 916 490 800 490C684 490 592 478 510 450Z" fill="#FFFFFF" fill-opacity="0.78"/>
+</svg>

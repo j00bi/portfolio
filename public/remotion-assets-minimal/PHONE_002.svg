@@ -1,0 +1,66 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="angleMetal" x1="475" y1="299" x2="1046" y2="865" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7F4EF"/>
+      <stop offset="0.18" stop-color="#B8B3AC"/>
+      <stop offset="0.5" stop-color="#8D8983"/>
+      <stop offset="0.78" stop-color="#ECE8E1"/>
+      <stop offset="1" stop-color="#B8B3AC"/>
+    </linearGradient>
+    <linearGradient id="angleGlass" x1="565" y1="352" x2="946" y2="808" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17191F"/>
+      <stop offset="0.22" stop-color="#0C0E13"/>
+      <stop offset="0.74" stop-color="#05060A"/>
+      <stop offset="1" stop-color="#020307"/>
+    </linearGradient>
+    <radialGradient id="angleGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(650 390) rotate(55.2481) scale(198 334)">
+      <stop offset="0" stop-color="#434957" stop-opacity="0.36"/>
+      <stop offset="0.48" stop-color="#1B1F27" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#0C0D11" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="angleEdge" x1="511" y1="286" x2="1013" y2="876" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.86"/>
+      <stop offset="0.24" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="0.84" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.36"/>
+    </linearGradient>
+    <radialGradient id="angleShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(814 862) rotate(90) scale(86 312)">
+      <stop offset="0" stop-color="#6B655D" stop-opacity="0.34"/>
+      <stop offset="0.42" stop-color="#8E877D" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#B5ADA3" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="angleShadowBlur" x="415" y="734" width="798" height="278" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+    <filter id="angleDeviceShadow" x="420" y="194" width="752" height="764" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="18"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.07 0 0 0 0 0.07 0 0 0 0 0.09 0 0 0 0.22 0"/>
+      <feBlend in2="SourceGraphic" result="shape"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#angleShadowBlur)">
+    <ellipse cx="814" cy="862" rx="278" ry="54" fill="url(#angleShadow)"/>
+  </g>
+
+  <g filter="url(#angleDeviceShadow)">
+    <g transform="translate(796 538) rotate(-24) translate(-796 -538)">
+      <rect x="507" y="242" width="578" height="592" rx="128" fill="url(#angleMetal)"/>
+      <rect x="521" y="256" width="550" height="564" rx="116" stroke="url(#angleEdge)" stroke-width="2"/>
+      <rect x="559" y="302" width="474" height="476" rx="92" fill="url(#angleGlass)"/>
+      <rect x="560.5" y="303.5" width="471" height="473" rx="90.5" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="3"/>
+      <rect x="693" y="332" width="206" height="42" rx="21" fill="#07080C"/>
+      <rect x="747" y="344" width="98" height="18" rx="9" fill="#11141A"/>
+      <circle cx="686" cy="353" r="6" fill="#13151B"/>
+      <circle cx="686" cy="353" r="2.4" fill="#2F3540"/>
+      <path d="M584 360C584 336.804 602.804 318 626 318H720C726.627 318 732 323.373 732 330C732 343.255 721.255 354 708 354H590C586.686 354 584 356.686 584 360V360Z" fill="#FFFFFF" fill-opacity="0.05"/>
+      <ellipse cx="696" cy="430" rx="190" ry="114" fill="url(#angleGlow)"/>
+      <path d="M997 350C1007.49 350 1016 358.507 1016 369V592C1016 670.424 952.424 734 874 734H716C637.576 734 574 670.424 574 592V369C574 358.507 582.507 350 593 350H997Z" fill="url(#angleGlow)" fill-opacity="0.22"/>
+      <rect x="1055" y="434" width="7" height="124" rx="3.5" fill="#B9B3AB"/>
+      <rect x="1055" y="578" width="7" height="78" rx="3.5" fill="#B9B3AB"/>
+      <rect x="533" y="398" width="7" height="132" rx="3.5" fill="#F5F2ED" fill-opacity="0.88"/>
+      <path d="M590 314C590 294.67 605.67 279 625 279H808C821.255 279 832 289.745 832 303V303C832 316.255 821.255 327 808 327H604C596.268 327 590 320.732 590 313V314Z" fill="#FFFFFF" fill-opacity="0.08"/>
+    </g>
+  </g>
+</svg>

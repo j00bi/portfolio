@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Husni — Scroll Narrative
-description: Single scroll-driven narrative portfolio. The entire page is one choreographed animation — scroll is the timeline. Elements don't just appear, they transform and flow into each other. Dark, editorial, warm amber accent.
+name: Husni — 3D Portfolio
+description: Interactive 3D portfolio built with Blender + Three.js. Scroll drives camera through a 3D scene. Dark, editorial, warm amber accent. Objects and environments created in Blender, rendered in browser.
 colors:
   background: "#0c0c0c"
   surface: "#111111"
@@ -53,7 +53,7 @@ typography:
     letterSpacing: "-0.02em"
   tech:
     fontFamily: Inter
-    fontSize: 0.65rem
+    fontSize: "0.65rem"
     fontWeight: "400"
     letterSpacing: "0.08em"
     textTransform: uppercase
@@ -69,89 +69,112 @@ spacing:
 
 ## Core Concept
 
-The entire page is ONE scroll-driven animation. There are no "sections" in the traditional sense — there is a single continuous sequence that plays as the user scrolls from top to bottom. Scroll position IS the timeline. Every element's position, opacity, and transform is a function of scroll progress.
+A 3D interactive portfolio. The user scrolls through a Three.js scene — not a flat page. The camera moves through a dark 3D environment, passing by floating objects, text panels, and lit elements that represent career milestones, projects, and skills.
 
-The emotional arc:
-1. **Arrival** (0-12%) — Name appears. Confident, still, alone on screen.
-2. **Context** (12-22%) — Name shrinks and moves up. Role and summary fade in below. Stats count up.
-3. **Journey** (22-62%) — Timeline draws downward. Three career entries appear one at a time, each fading in as you scroll to it, each fading out as you scroll past. The golden line fills continuously.
-4. **Work** (62-82%) — Projects appear in a staggered grid, cards sliding in from alternating sides.
-5. **Foundation** (82-92%) — Skills grid fills in like a mosaic, cell by cell.
-6. **Close** (92-100%) — Contact info and a single closing line.
+Think: walking through a dimly lit gallery. Each room has something different. The scroll wheel is your feet.
 
-## Animation Sequence (scroll-linked)
+Inspiration: Mr. Panda's Psychologically Safe Portfolio (Blender + Three.js + Krita), Anthropic's scroll-driven site, dark editorial aesthetics.
 
-Every element has a `data-scroll` attribute with a start and end percentage (0-100 of total scroll). Between those points, the element transitions from its initial state to its final state. Outside that range, it's either hidden (before start) or at final state (after end).
+## Scene Layout (scroll-driven camera path)
 
-### Phase 1: Arrival (0-12% scroll)
+The camera follows a predefined path through a 3D space. Scroll position maps to camera position along this path. The scene is pre-lit with warm amber point lights and cool ambient fill.
 
-- **Name "Husni Sarafi"**: Each character starts at opacity:0, translateY:40px. As scroll progresses 0→8%, each char slides up and fades in with stagger (50ms offset per char, spring easing). By 8% scroll, all chars are visible.
-- **Accent line**: At 8% scroll, a thin amber line (2px, 80px wide) draws itself from left to right under the name. Uses width transition from 0→80px. Completes by 10%.
-- **Subtitle "RPA Consultant · Automation Engineer"**: Fades in from opacity:0 at 10%, completes by 12%.
+### Zone 1: Arrival (0-15% scroll)
+- Camera starts close to a large floating object — maybe a desk, a terminal, or an abstract geometric shape
+- "Husni Sarafi" text materializes as a 3D text or as an HTML overlay that fades in
+- Ambient particles drift slowly
+- Single amber point light illuminates the center
 
-### Phase 2: Context (12-22% scroll)
+### Zone 2: Context (15-25% scroll)
+- Camera pulls back. The object from Zone 1 shrinks into the distance
+- Stats and role text appear as floating panels or HTML overlays
+- Environment reveals itself — dark space with subtle fog
 
-- **Name**: Smoothly scales down from 5rem to 3rem and translates upward to become a persistent header. This is the key transition — the hero becomes the page header.
-- **Stats row** (3 stats: years, processes, systems): Each stat fades in from below with stagger. The numbers count up from 0 to their final value using a JS counter animated by scroll progress.
-- **Summary paragraph**: Fades in below stats.
+### Zone 3: Journey (25-65% scroll) — THE TIMELINE
+- Camera moves along a path that passes by 3 stations (career entries)
+- Each station is a lit area with text/info
+- A glowing amber line on the floor connects the stations — the timeline
+- As camera approaches each station, it lights up. As it passes, it dims
+- 3D objects at each station represent the company/role (abstract is fine)
 
-### Phase 3: Journey (22-62% scroll) — THE TIMELINE
+### Zone 4: Work (65-82% scroll) — PROJECTS
+- Camera enters a different space — maybe an open area with floating project cards/objects
+- Each project is represented by a 3D element or a floating HTML panel
+- Objects gently rotate/bob in place
+- Camera weaves between them
 
-This is the centerpiece. A vertical golden line draws downward as the user scrolls through this range. Three career entries appear one at a time.
+### Zone 5: Foundation (82-92% scroll) — SKILLS
+- A grid or constellation of small lit nodes/objects
+- Each represents a skill
+- Camera moves through or above them
+- They pulse gently
 
-- **Timeline track**: A 2px line at the left edge of the content area. Its height grows from 0% to 100% of the timeline container as scroll progresses from 22% to 62%. The line has a gradient: amber at the growing tip, fading to transparent at the top.
-- **Node dots**: 12px circles on the track. Each appears when its entry is in view. Initially: border color = border (#1c1c1c), background = background (#0c0c0c). When lit: border = accent (#e0a04a), background = accent, with a 4px glow ring + 16px ambient shadow.
-- **Entry 1 (IBM, 2023)**: Appears at ~28% scroll. Year label fades in first, then company name (Instrument Serif), then role label, then body text. Each element has a 30ms stagger. As you scroll past (~38%), it fades to 40% opacity and stays there.
-- **Entry 2 (E-Outsource, 2024)**: Appears at ~38% scroll. Same stagger pattern. Fades to 40% at ~48%.
-- **Entry 3 (EY, 2026)**: Appears at ~48% scroll. Same stagger pattern. Stays at full opacity (it's the current role).
-
-The key: entries don't disappear — they dim. The timeline is a trail of where you've been, with the current position brightest.
-
-### Phase 4: Work (62-82% scroll) — PROJECTS
-
-- **Section label "Selected Work"**: Fades in from below at 62%.
-- **Project cards**: 2-column grid. 5 cards total. Each card slides in from alternating sides (odd from left, even from right) with opacity fade. Stagger: 40ms between cards. Cards have:
-  - Name in Instrument Serif
-  - Tech tags in uppercase amber
-  - Description in Inter 300
-  - Hover: translateY(-3px), border brightens, subtle amber radial gradient at top-left
-- Cards don't scroll — they're positioned in a grid that fades/slides in as a group.
-
-### Phase 5: Foundation (82-92% scroll) — SKILLS
-
-- **Section label "Core Stack"**: Fades in at 82%.
-- **Skill grid**: Seamless grid with 1px gap borders. Cells fill in one by one with a mosaic effect — each cell fades in with a slight scale from 0.95→1. Stagger: 20ms between cells. 5 skills total.
-
-### Phase 6: Close (92-100% scroll) — CONTACT
-
-- **Education line**: Fades in. "BSc Actuarial Science — UiTM Shah Alam"
-- **Contact links**: Email and GitHub fade in with stagger.
-- **Closing line**: A single line in Instrument Serif: "Let's build something." Fades in last.
+### Zone 6: Close (92-100% scroll)
+- Camera arrives at a final spot
+- Contact info appears
+- Closing message
+- Scene gently fades or the camera settles
 
 ## Technical Implementation
 
-- **Scroll handler**: Single `requestAnimationFrame` loop. On scroll, calculate total scroll progress (0-1). For each element with `data-scroll`, calculate its local progress and apply transform/opacity.
-- **No IntersectionObserver for main animations** — everything is scroll-position-driven. Use IntersectionObserver ONLY for the nav active state.
-- **CSS custom properties**: Each element's progress is set as `--progress` CSS variable. CSS `calc()` and `transition` handle the visual interpolation.
-- **Stats counter**: JS counts from 0 to final value, progress tied to scroll position.
-- **Nav**: Fixed top, backdrop blur, appears after 5% scroll. Active link tracking via IntersectionObserver on section markers.
-- **prefers-reduced-motion**: All scroll animations disabled. Content visible immediately. Nav still works.
+### Three.js Setup
+- Load Three.js from CDN (unpkg or cdnjs)
+- Use `importmap` for clean ES module imports
+- Scene: dark fog (exponential, near 10, far 80), ambient light (dim cool), point lights (warm amber)
+- Camera: PerspectiveCamera, position driven by scroll along a CatmullRomCurve3 path
+- Renderer: WebGLRenderer with antialias, toneMapping, shadows
+- Post-processing: optional bloom pass for the glow effect
 
-## Layout
+### Camera Path
+- Define a 3D curve (CatmullRomCurve3) with control points for each zone
+- Scroll position (0-1) maps to `curve.getPoint(t)`
+- Camera looks ahead on the curve using `curve.getPoint(t + 0.01)` as the lookAt target
+- Smooth interpolation, no snapping
 
-- Single column, max-width 860px, centered.
-- Generous vertical spacing between phases (80px+).
-- The page is TALL — maybe 600vh total — to give enough scroll distance for the animation to breathe. Each phase gets enough scroll room for smooth transitions.
+### HTML Overlay (CSS2DRenderer or manual projection)
+- Text content (name, role, stats, timeline entries, projects, skills, contact) rendered as HTML divs overlaid on the 3D canvas
+- Position each div using CSS2DRenderer or by projecting 3D world positions to screen coordinates
+- Opacity and transform of each div driven by scroll progress (same principle as before)
+- This keeps text crisp (no 3D text rendering needed) while the scene provides atmosphere
+
+### Scroll Handler
+- Single `requestAnimationFrame` loop
+- Calculate scroll progress (0-1)
+- Update camera position on curve
+- Update HTML overlay opacity/transform for each zone
+- Update any per-zone 3D animations (object rotation, light intensity, etc.)
+
+### 3D Assets
+- For now: use primitive Three.js geometries (boxes, spheres, cylinders, torus) with emissive materials
+- Colors: dark surface (#111), amber emissive (#e0a04a) for lit elements, dim blue-grey for ambient
+- Later: replace primitives with Blender-exported GLB models via Blender MCP
+
+### Responsive
+- Full-screen canvas, no scrolling body (prevent default scroll, use wheel event)
+- HTML overlays use responsive font sizes (clamp)
+- Mobile: simpler camera path, fewer particles, touch scroll support
+
+### Performance
+- Target 60fps on mid-range hardware
+- Keep polygon count low (primitives for now)
+- Use instanced meshes if many similar objects
+- Particles: use Points with BufferGeometry (max ~500 particles)
+- Fog hides draw distance issues
+
+## Files
+- `web/index.html` — single file, everything inline
+- `assets/` — future GLB models from Blender (not needed for v1)
 
 ## Do's and Don'ts
 
-- **Do** make scroll feel like a timeline — smooth, continuous, proportional.
-- **Do** keep amber scarce — only timeline, labels, tags, highlights.
-- **Do** use Instrument Serif for all headings, Inter for everything else.
-- **Do** make the name→header transition seamless — it's the signature moment.
-- **Do** dim (not hide) past timeline entries — the trail matters.
-- **Don't** use binary on/off animations. Everything is proportional to scroll.
-- **Don't** add more accent colors.
-- **Don't** use frameworks. Single HTML file, pure CSS + vanilla JS.
-- **Don't** make the page feel like separate sections stitched together. It's ONE flow.
-- **Don't** forget prefers-reduced-motion.
+- **Do** make scroll feel like walking through a space — smooth, continuous camera movement
+- **Do** use HTML overlays for text — keep it crisp, don't render text in 3D
+- **Do** keep the amber accent consistent — lit elements, glow, accent text
+- **Do** use fog and lighting to create depth and atmosphere
+- **Do** use primitives first — ship fast, replace with Blender models later
+- **Do** include prefers-reduced-motion — skip camera animation, show all content at once
+- **Don't** make the user wait — assets should be minimal for v1 (no external GLB yet)
+- **Don't** overcomplicate the scene — dark space, fog, a few lit objects, camera path
+- **Don't** use frameworks beyond Three.js
+- **Don't** add more accent colors
+- **Don't** make it feel like a tech demo — it's a portfolio, it needs content and personality

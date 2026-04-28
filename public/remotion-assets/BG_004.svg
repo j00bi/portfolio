@@ -1,0 +1,25 @@
+<svg width="2048" height="1024" viewBox="0 0 2048 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="1024" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#080812"/>
+      <stop offset="1" stop-color="#0D0D1A"/>
+    </linearGradient>
+    <radialGradient id="rim" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1024 212) rotate(90) scale(280 860)">
+      <stop offset="0" stop-color="#6C63FF" stop-opacity="0.3"/>
+      <stop offset="0.55" stop-color="#00D4FF" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#00D4FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="stageGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1024 732) rotate(90) scale(164 486)">
+      <stop offset="0" stop-color="#F0F0FF" stop-opacity="0.12"/>
+      <stop offset="0.55" stop-color="#6C63FF" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#05050F" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="36"/>
+    </filter>
+  </defs>
+  <rect width="2048" height="1024" fill="url(#bg)"/>
+  <rect width="2048" height="1024" fill="url(#rim)"/>
+  <ellipse cx="1024" cy="736" rx="420" ry="104" fill="url(#stageGlow)" filter="url(#shadow)"/>
+  <ellipse cx="1024" cy="786" rx="516" ry="74" fill="#05050F" fill-opacity="0.72"/>
+</svg>

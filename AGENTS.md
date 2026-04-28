@@ -96,34 +96,40 @@ Operating instructions for coding agents. Read before every task.
 ## 9. Project context
 
 ### What this is
-Personal portfolio for Husni Sarafi — a single-file HTML/CSS/JS website. Dark minimal design, scroll-driven narrative animation, warm amber accent.
+Personal portfolio for Husni Sarafi — an interactive 3D portfolio. Three.js scene with scroll-driven camera movement through a dark 3D environment. HTML overlays for text content. Warm amber accent.
 
 ### Stack
 - Single HTML file: `web/index.html`
-- Pure CSS + vanilla JS (no frameworks, no build tools)
+- Three.js (loaded from CDN via importmap)
+- Pure CSS + vanilla JS for overlays and controls
 - Google Fonts: Instrument Serif, Inter
 - Content source: `resume-data.json`
 - Design spec: `DESIGN.md`
+- Future: Blender-exported GLB models (via Blender MCP)
 
 ### Layout
 - Source lives in: `web/index.html`
 - Design tokens: `DESIGN.md` (YAML frontmatter + markdown)
 - Content data: `resume-data.json`
 - Do not modify: `resume-data.json` structure without asking
+- 3D assets (future): `assets/*.glb`
 
 ### Conventions
-- All styles in `<style>` tag, all JS in `<script>` tag
+- Three.js via CDN importmap (unpkg), ES module `<script type="module">`
+- HTML overlays for all text content — do not render text in 3D
+- Camera path defined as CatmullRomCurve3, scroll position maps to path progress
+- Scroll handler: `requestAnimationFrame` loop, wheel event (prevent default scroll)
 - CSS custom properties for all tokens (colors, spacing, typography)
-- Scroll animations use `requestAnimationFrame` + CSS custom property `--progress`
 - `prefers-reduced-motion` media query is mandatory
-- No external CSS/JS files — everything self-contained
+- Use Three.js primitives (BoxGeometry, SphereGeometry, etc.) for v1 — no external GLB yet
 
 ### Forbidden
-- No React, Vue, Tailwind, or any framework
+- No React, Vue, Tailwind, or any framework (Three.js is the only exception)
 - No additional accent colors (amber #e0a04a is the only one)
-- No images, SVGs, or canvas — CSS only for graphics
+- No external GLB models in v1 — primitives only, GLB comes later via Blender
 - No binary on/off animations — everything proportional to scroll position
 - Do not remove `prefers-reduced-motion` support
+- Do not render text in 3D — always use HTML overlays
 
 ---
 

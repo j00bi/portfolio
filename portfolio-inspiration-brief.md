@@ -139,3 +139,39 @@ Based on all four inspirations:
    - Dark theme base with subtle motion
    - Mobile-first, responsive
    - No heavy JS frameworks — keep it performant
+
+---
+
+## 5. @lucas_flatwhite — Blender + Three.js + Krita Portfolio
+
+**Source:** https://x.com/lucas_flatwhite/status/2047315393434571005
+**Repo:** https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio (362 stars)
+**Live:** https://www.mr-pandas-psychologically-safe-portfolio.com/
+**Tutorial:** https://www.youtube.com/watch?v=zyWD2E8AHCg
+**Article:** https://tympanus.net/codrops/2025/12/30/the-increasing-importance-of-psychological-safety-and-self-awareness-for-creative-work/
+
+**What it is:** A concept portfolio built entirely with Blender (3D art), Krita (texture painting), and Three.js (interactive web rendering). Won FWA of the Day and Awwwards SOTD.
+
+**Key points:**
+- Full 3D scene rendered in browser via Three.js
+- Models created and textured in Blender, hand-painted with Krita
+- Interactive paper/craft aesthetic — notebook material, origami-style animations
+- Narrative-driven: Mr. Panda character guides visitors through content
+- Rich microinteractions: burning paper effects, hover states, easter eggs
+- Single-page experience, no traditional sections
+
+**How to apply to Husni's portfolio:**
+- Blender MCP + Codex can generate 3D scenes/objects programmatically
+- Export Blender scenes as glTF/GLB, load in Three.js for web
+- Krita for hand-painted textures on 3D models
+- Interactive 3D portfolio where visitors navigate through a 3D space
+- Character or mascot element could add personality
+- Paper/craft aesthetic is distinctive and memorable
+- Could blend with scroll narrative: 3D scene reacts to scroll position
+
+**Tech stack for this direction:**
+- Blender (3D modeling, scene composition)
+- Krita (texture painting)
+- Three.js (web rendering, camera, lighting)
+- GSAP (scroll-linked animations, timeline control)
+- Single HTML file with embedded GLB or external asset loading
