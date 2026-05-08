@@ -86,7 +86,7 @@ nav .links a.active { background: var(--ink); color: var(--surface); }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 100px 0 60px;
+  padding: 100px 0 50px;
   position: relative;
 }
 .hero-label {
@@ -136,20 +136,45 @@ nav .links a.active { background: var(--ink); color: var(--surface); }
 /* ─── HERO STATS ─── */
 .hero-stats {
   display: flex;
-  gap: 40px;
-  margin-top: 48px;
+  gap: 32px;
+  margin-top: 44px;
   flex-wrap: wrap;
 }
-.stat-val { font-size: 2rem; font-weight: 900; line-height: 1; color: var(--violet); }
-.stat-val .u { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-left: 2px; }
+.stat-pill {
+  background: rgba(61,74,125,0.06);
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(61,74,125,0.08);
+}
+.stat-val { font-size: 2.6rem; font-weight: 900; line-height: 1; color: var(--violet); }
+.stat-val .u { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-left: 2px; }
 .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ─── HERO TECH CLOUD ─── */
+.tech-cloud {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.tech-tag {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.tech-tag:hover { background: var(--violet); border-color: var(--violet); color: white; }
 
 /* ─── SCROLL FADE ─── */
 .s { opacity: 0; transform: translateY(30px); transition: none; }
 
 /* ─── SECTION ─── */
-section { padding: 80px 0; }
-.sec-head { margin-bottom: 40px; }
+section { padding: 64px 0; }
+.sec-head { margin-bottom: 36px; }
 .sec-label {
   font-size: 12px;
   color: var(--red);
@@ -166,7 +191,7 @@ section { padding: 80px 0; }
 }
 
 /* ─── WORK CARDS (Husni's Design) ─── */
-.work-stack { display: flex; flex-direction: column; gap: 32px; }
+.work-stack { display: flex; flex-direction: column; gap: 28px; }
 
 .work-card {
   position: relative;
@@ -181,6 +206,16 @@ section { padding: 80px 0; }
   perspective: 1200px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: default;
+  overflow: hidden;
+}
+.work-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--violet), var(--cyan));
+  border-radius: 4px 0 0 4px;
+  opacity: 0.5;
 }
 .work-card:hover {
   transform: translateY(-4px);
@@ -188,13 +223,13 @@ section { padding: 80px 0; }
 }
 
 .icon-3d-wrap {
-  width: 84px; height: 84px;
+  width: 120px; height: 120px;
   perspective: 800px;
   flex-shrink: 0;
 }
 .icon-3d {
   width: 100%; height: 100%;
-  border-radius: 20px;
+  border-radius: 24px;
   background: linear-gradient(135deg, #eef6ff, #e8f7ef);
   display: flex;
   align-items: center; justify-content: center;
@@ -203,7 +238,7 @@ section { padding: 80px 0; }
   box-shadow: 0 12px 30px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
   overflow: hidden;
 }
-.icon-3d img { width: 100%; height: 100%; object-fit: contain; border-radius: 20px; }
+.icon-3d img { width: 100%; height: 100%; object-fit: contain; border-radius: 24px; }
 .work-card:hover .icon-3d {
   transform: translateY(-10px) rotateX(15deg) rotateY(-15deg) scale(1.05);
   box-shadow: 0 28px 60px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.8);
@@ -235,6 +270,9 @@ section { padding: 80px 0; }
 h3 { font-size: 22px; font-weight: 900; margin: 10px 0 4px; }
 .subtitle { color: var(--violet); font-weight: 600; font-size: 13px; margin-bottom: 12px; }
 .desc { max-width: 620px; line-height: 1.6; color: var(--text-mid); font-size: 14px; margin-bottom: 14px; }
+.features { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.feature-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+.feature-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
 
 /* ─── BULB ─── */
 .bulb-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
@@ -277,16 +315,36 @@ h3 { font-size: 22px; font-weight: 900; margin: 10px 0 4px; }
 
 /* ─── SKILLS ─── */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-.skill-cell { background: var(--surface); padding: 24px 28px; }
-.skill-label { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.skill-cell { background: var(--surface); padding: 22px 24px; }
+.skill-label { font-weight: 700; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.skill-icon { font-size: 16px; }
 .skill-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
 .skill-body .hl { color: var(--violet); font-weight: 600; }
 
+/* ─── CERTIFICATIONS ─── */
+.cert-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cert-pill {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cert-pill strong { color: var(--ink); }
+
 /* ─── EDUCATION ─── */
-.edu-block { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
-.edu-school { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 4px; }
+.edu-block { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.edu-school { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 2px; }
 .edu-major { font-size: 14px; color: var(--muted); line-height: 1.6; }
-.edu-date { font-size: 12px; color: var(--text-mid); margin-top: 10px; }
+.edu-date { font-size: 12px; color: var(--text-mid); }
 
 /* ─── FOOTER ─── */
 footer {
@@ -309,13 +367,18 @@ footer .f-note { font-size: 12px; color: var(--muted); }
 /* ─── RESPONSIVE ─── */
 @media (max-width: 700px) {
   .work-card { flex-direction: column; align-items: flex-start; padding: 28px; gap: 20px; }
+  .icon-3d-wrap { width: 84px; height: 84px; }
   .page { padding: 0 16px; }
   .skills-grid { grid-template-columns: 1fr; }
   nav .links a { font-size: 11px; padding: 5px 8px; }
-  .hero-stats { gap: 24px; }
+  .hero-stats { gap: 16px; }
+  .stat-pill { padding: 10px 16px; }
+  .stat-val { font-size: 2rem; }
   .hero { padding: 100px 0 40px; }
   section { padding: 48px 0; }
   .tl-company { font-size: 1.1rem; }
+  .cert-strip { gap: 8px; }
+  .features { gap: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -349,10 +412,22 @@ footer .f-note { font-size: 12px; color: var(--muted); }
     <a class="btn btn-secondary" href="mailto:husnisarafi17@gmail.com">Start a conversation</a>
   </div>
   <div class="hero-stats s" data-delay="0.35">
-    <div><div class="stat-val">3<span class="u">yrs</span></div><div class="stat-label">automation & AI engineering</div></div>
-    <div><div class="stat-val">99<span class="u">%</span></div><div class="stat-label">agent fleet uptime</div></div>
-    <div><div class="stat-val">5</div><div class="stat-label">AI projects shipped</div></div>
-    <div><div class="stat-val">24/7</div><div class="stat-label">autonomous agent fleet</div></div>
+    <div class="stat-pill"><div class="stat-val">3<span class="u">yrs</span></div><div class="stat-label">automation & AI engineering</div></div>
+    <div class="stat-pill"><div class="stat-val">99<span class="u">%</span></div><div class="stat-label">agent fleet uptime</div></div>
+    <div class="stat-pill"><div class="stat-val">5</div><div class="stat-label">AI projects shipped</div></div>
+    <div class="stat-pill"><div class="stat-val">24/7</div><div class="stat-label">autonomous agent fleet</div></div>
+  </div>
+  <div class="tech-cloud s" data-delay="0.4">
+    <span class="tech-tag">Python</span>
+    <span class="tech-tag">LLM APIs</span>
+    <span class="tech-tag">Docker</span>
+    <span class="tech-tag">Whisper</span>
+    <span class="tech-tag">FastAPI</span>
+    <span class="tech-tag">ChromaDB</span>
+    <span class="tech-tag">Ollama</span>
+    <span class="tech-tag">Oracle Cloud</span>
+    <span class="tech-tag">Freqtrade</span>
+    <span class="tech-tag">MCP</span>
   </div>
 </section>
 
@@ -409,21 +484,39 @@ footer .f-note { font-size: 12px; color: var(--muted); }
   <div class="sec-head s"><p class="sec-label">Capabilities</p><h2 class="sec-title">What I work with</h2></div>
   <div class="skills-grid s">
     <div class="skill-cell">
-      <div class="skill-label">AI & LLMs</div>
-      <div class="skill-body">Whisper STT, Ollama (local LLMs), <span class="hl">RAG with ChromaDB</span>, prompt engineering, bilingual MY/EN NLP. Running autonomous agents 24/7.</div>
+      <div class="skill-label"><span class="skill-icon">🧠</span> LLMs & Agents</div>
+      <div class="skill-body">Prompt engineering, <span class="hl">RAG with ChromaDB</span>, Ollama local models, MCP tool integration. Running autonomous agents 24/7 using Hermes agent orchestration.</div>
     </div>
     <div class="skill-cell">
-      <div class="skill-label">Languages</div>
-      <div class="skill-body">Python (primary), JavaScript, PowerShell, SQL. HTML/CSS/JS for frontend. <span class="hl">Python</span> for all AI pipelines and automation.</div>
+      <div class="skill-label"><span class="skill-icon">🎤</span> Speech & Audio</div>
+      <div class="skill-body">Whisper STT for Malay-English transcription, audio pipeline design, real-time audio capture in locked-down environments.</div>
     </div>
     <div class="skill-cell">
-      <div class="skill-label">Cloud & Infra</div>
-      <div class="skill-body">Docker, Oracle Cloud, SSH tunneling, <span class="hl">FastAPI</span> backends. Self-hosted inference servers with 99% uptime.</div>
+      <div class="skill-label"><span class="skill-icon">🐍</span> Languages</div>
+      <div class="skill-body"><span class="hl">Python</span> (primary), JavaScript, PowerShell, SQL. HTML/CSS/JS for frontends.</div>
     </div>
     <div class="skill-cell">
-      <div class="skill-label">RPA Platforms</div>
-      <div class="skill-body">Production across <span class="hl">BluePrism, UiPath, AutomationAnywhere</span> — discovery to deployment at enterprise scale.</div>
+      <div class="skill-label"><span class="skill-icon">☁️</span> Cloud & Infra</div>
+      <div class="skill-body">Docker, Oracle Cloud (compute/network), <span class="hl">FastAPI</span> backends, SSH tunneling. Self-hosted services with 99% uptime.</div>
     </div>
+    <div class="skill-cell">
+      <div class="skill-label"><span class="skill-icon">🔧</span> Tools & Frameworks</div>
+      <div class="skill-body">Freqtrade trading bots, BluePrism/UiPath/AA, Git, cron orchestration, Freqtrade trading automation, Yeelight LAN control.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-label"><span class="skill-icon">🏭</span> RPA Platforms</div>
+      <div class="skill-body">Production across <span class="hl">BluePrism, UiPath, AutomationAnywhere</span> — discovery to deployment at enterprise scale in billing, logistics, and compliance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="sec-head s"><p class="sec-label">Credentials</p><h2 class="sec-title">Certifications & training</h2></div>
+  <div class="cert-strip s">
+    <div class="cert-pill"><strong>BluePrism</strong> · Accredited Developer</div>
+    <div class="cert-pill"><strong>UiPath</strong> · Advanced RPA Developer</div>
+    <div class="cert-pill"><strong>AutomationAnywhere</strong> · Advanced RPA Professional</div>
   </div>
 </section>
 
@@ -431,8 +524,10 @@ footer .f-note { font-size: 12px; color: var(--muted); }
 <section id="education">
   <div class="sec-head s"><p class="sec-label">Education</p><h2 class="sec-title">Foundation</h2></div>
   <div class="edu-block s">
-    <div class="edu-school">UiTM Shah Alam</div>
-    <div class="edu-major">BSc (Hons) Actuarial Science</div>
+    <div>
+      <div class="edu-school">UiTM Shah Alam</div>
+      <div class="edu-major">BSc (Hons) Actuarial Science</div>
+    </div>
     <div class="edu-date">Graduated 2022</div>
   </div>
 </section>
@@ -452,20 +547,28 @@ footer .f-note { font-size: 12px; color: var(--muted); }
 const projects = [
   { title: "Agent Harness", subtitle: "Autonomous AI operations",
     desc: "Daily autonomous AI assistant running 24/7 — scheduled cron jobs, multi-agent delegation, cross-platform messaging, and MCP tool integration. Powers a fleet of 4 Freqtrade trading agents managing personal workflow automation end-to-end.",
+    features: ["24/7 autonomous operation", "Multi-agent delegation", "4 Freqtrade trading bots", "Cross-platform messaging"],
     badges: [{ text: "Hermes", cls: "badge-hermes" }, { text: "OpenClaw", cls: "badge-openclaw" }],
-    tags: ["Python", "LLM APIs", "Cron", "MCP", "Freqtrade"], icon: "public/badges/agent-harness-3d.png" },
+    tags: ["Python", "LLM APIs", "Cron", "MCP", "Freqtrade"], icon: "public/badges/agent-harness-3d.png",
+    fcolor: "#0e7490" },
   { title: "Meeting Min", subtitle: "Bilingual AI transcription",
     desc: "Self-hosted meeting intelligence for locked-down corporate environments. Captures Teams audio, transcribes Malay-English speech via Whisper, generates structured summaries with local LLMs. Deployed through SSH tunneling.",
+    features: ["Real-time Teams audio capture", "Malay-English bilingual STT", "LLM-generated summaries", "SSH tunnel deployment"],
     badges: [{ text: "Whisper STT", cls: "badge-whisper" }, { text: "Ollama", cls: "badge-whisper" }],
-    tags: ["Whisper", "Ollama", "Docker", "SSH", "Python"], icon: "public/badges/meeting-min-3d.png" },
+    tags: ["Whisper", "Ollama", "Docker", "SSH", "Python"], icon: "public/badges/meeting-min-3d.png",
+    fcolor: "#0f766e" },
   { title: "RAG Demo", subtitle: "Retrieval-augmented generation",
     desc: "Full-stack RAG pipeline: document ingestion into ChromaDB vector store, semantic retrieval with local embeddings, and LLM-powered answer generation via Ollama. FastAPI backend, Docker-deployed on Oracle Cloud.",
+    features: ["ChromaDB vector storage", "Semantic document retrieval", "Ollama-powered generation", "Oracle Cloud deployment"],
     badges: [{ text: "ChromaDB", cls: "badge-rag" }, { text: "FastAPI", cls: "badge-rag" }],
-    tags: ["ChromaDB", "Ollama", "FastAPI", "Docker", "Oracle Cloud"], icon: "public/badges/rag-demo-3d.png" },
+    tags: ["ChromaDB", "Ollama", "FastAPI", "Docker", "Oracle Cloud"], icon: "public/badges/rag-demo-3d.png",
+    fcolor: "#4d6636" },
   { title: "Yeelight Backlight", subtitle: "Realtime physical automation",
     desc: "Realtime screen-edge colour sampling piped to Yeelight bulbs over LAN TCP. Six iterations solving TCP buffer overflow with threaded sender + drop queue, temporal smoothing, dark mode fallback, and adaptive rate limiting.",
+    features: ["Screen-edge colour sampling", "TCP buffer overflow handling", "Temporal smoothing", "Dark mode fallback"],
     badges: [{ text: "Bulb", cls: "badge-bulb" }],
-    tags: ["Python", "NumPy", "TCP", "MSS", "LAN"], icon: "public/badges/yeelight-3d.png", yeelight: true }
+    tags: ["Python", "NumPy", "TCP", "MSS", "LAN"], icon: "public/badges/yeelight-3d.png",
+    fcolor: "#7a5f1e", yeelight: true }
 ];
 
 const container = document.getElementById("work-stack");
@@ -484,6 +587,9 @@ function toggleBulb() {
 projects.forEach(p => {
   const card = document.createElement("div"); card.className = "work-card";
   const badgesHtml = p.badges.map(b => `<span class="badge ${b.cls}">${b.text}</span>`).join("");
+  const featuresHtml = p.features.map(f =>
+    `<span class="feature-item"><span class="feature-dot" style="background:${p.fcolor}"></span>${f}</span>`
+  ).join("");
   let extra = "";
   if (p.yeelight) {
     extra = `<div class="bulb-row">
@@ -505,6 +611,7 @@ projects.forEach(p => {
       <h3>${p.title}</h3>
       <p class="subtitle">${p.subtitle}</p>
       <p class="desc">${p.desc}</p>
+      <div class="features">${featuresHtml}</div>
       <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
     </div>`;
   container.appendChild(card);
