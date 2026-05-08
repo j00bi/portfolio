@@ -3,127 +3,565 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Husni Sarafi — AI Automation Engineer" />
-<title>Husni Sarafi — Portfolio</title>
+<title>Husni Sarafi — AI Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #101114;
-    --paper: #f7f3e8;
-    --surface: #fffaf0;
-    --line: #d8d0bd;
-    --muted: #6f6a5f;
-    --red: #c74735;
-    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    padding: 80px 40px;
-    min-height: 100vh;
-    background:
-      linear-gradient(90deg, rgba(16, 17, 20, 0.035) 1px, transparent 1px),
-      linear-gradient(0deg, rgba(16, 17, 20, 0.035) 1px, transparent 1px),
-      var(--paper);
-    background-size: 44px 44px;
-  }
-  .page { max-width: 800px; margin: 0 auto; }
-  h1 { font-size: clamp(42px, 6vw, 72px); line-height: 0.94; margin-bottom: 12px; }
-  .eyebrow {
-    color: var(--red);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .lede {
-    color: var(--muted);
-    font-size: 18px;
-    line-height: 1.55;
-    margin-bottom: 40px;
-    max-width: 600px;
-  }
-  .section-list { display: grid; gap: 12px; }
-  .section-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--surface);
-    text-decoration: none;
-    color: var(--ink);
-    transition: transform 200ms ease, box-shadow 200ms ease;
-  }
-  .section-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(31, 28, 20, 0.12);
-  }
-  .section-card h3 { font-size: 18px; margin-bottom: 4px; }
-  .section-card p { color: var(--muted); font-size: 13px; }
-  .badge {
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .badge-new {
-    background: rgba(199, 71, 53, 0.10);
-    border-color: rgba(199, 71, 53, 0.25);
-    color: var(--red);
-  }
-  hr {
-    border: none;
-    border-top: 1px solid var(--line);
-    margin: 40px 0;
-  }
-  .footer-text {
-    color: var(--muted);
-    font-size: 13px;
-    text-align: center;
-  }
-  @media (max-width: 600px) {
-    body { padding: 40px 20px; }
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #101114;
+  --paper: #f7f3e8;
+  --surface: #fffaf0;
+  --card-bg: #ffffff;
+  --line: #d8d0bd;
+  --muted: #6f6a5f;
+  --text-mid: #555;
+  --red: #c74735;
+  --violet: #3d4a7d;
+  --cyan: #16a1a8;
+  --green: #627c45;
+  --amber: #e0a04a;
+  --shadow: 0 8px 40px rgba(31,28,20,0.10);
+  --shadow-lg: 0 28px 80px rgba(31,28,20,0.18);
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background:
+    linear-gradient(90deg, rgba(16,17,20,0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(16,17,20,0.035) 1px, transparent 1px),
+    var(--paper);
+  background-size: 44px 44px;
+}
+
+::selection { background: var(--violet); color: white; }
+
+.page { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 8px 18px 8px 22px;
+  border: 1px solid rgba(16,17,20,0.10);
+  border-radius: 999px;
+  background: rgba(255,250,240,0.82);
+  backdrop-filter: blur(16px);
+  width: min(600px, calc(100% - 40px));
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(31,28,20,0.10); }
+nav .logo { font-weight: 800; font-size: 14px; color: var(--ink); }
+nav .links { display: flex; gap: 4px; }
+nav .links a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+nav .links a:hover { background: rgba(16,17,20,0.05); color: var(--ink); }
+nav .links a.active { background: var(--ink); color: var(--surface); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0 60px;
+  position: relative;
+}
+.hero-label {
+  font-size: 12px;
+  color: var(--red);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  max-width: 760px;
+}
+.hero-sub {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--ink); color: var(--surface); }
+.btn-primary:hover { box-shadow: 0 8px 24px rgba(16,17,20,0.2); }
+.btn-secondary {
+  border: 1px solid rgba(16,17,20,0.12);
+  color: var(--muted);
+}
+.btn-secondary:hover { background: var(--surface); color: var(--ink); }
+
+/* ─── HERO STATS ─── */
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+.stat-val { font-size: 2rem; font-weight: 900; line-height: 1; color: var(--violet); }
+.stat-val .u { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-left: 2px; }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ─── SCROLL FADE ─── */
+.s { opacity: 0; transform: translateY(30px); transition: none; }
+
+/* ─── SECTION ─── */
+section { padding: 80px 0; }
+.sec-head { margin-bottom: 40px; }
+.sec-label {
+  font-size: 12px;
+  color: var(--red);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 0.98;
+  max-width: 600px;
+}
+
+/* ─── WORK CARDS (Husni's Design) ─── */
+.work-stack { display: flex; flex-direction: column; gap: 32px; }
+
+.work-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 36px 40px;
+  border-radius: 20px;
+  background: radial-gradient(circle at top left, #ffffff, #fff6e8);
+  border: 1px solid rgba(16,17,20,0.08);
+  box-shadow: 0 4px 24px rgba(31,28,20,0.06);
+  perspective: 1200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+.work-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(31,28,20,0.12);
+}
+
+.icon-3d-wrap {
+  width: 84px; height: 84px;
+  perspective: 800px;
+  flex-shrink: 0;
+}
+.icon-3d {
+  width: 100%; height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #eef6ff, #e8f7ef);
+  display: flex;
+  align-items: center; justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  overflow: hidden;
+}
+.icon-3d img { width: 100%; height: 100%; object-fit: contain; border-radius: 20px; }
+.work-card:hover .icon-3d {
+  transform: translateY(-10px) rotateX(15deg) rotateY(-15deg) scale(1.05);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.content { flex: 1; min-width: 0; }
+.badges, .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-hermes { background: rgba(34,211,238,0.10); color: #0e7490; border: 1px solid rgba(34,211,238,0.2); }
+.badge-openclaw { background: rgba(248,228,172,0.20); color: #7a5f1e; border: 1px solid rgba(248,228,172,0.3); }
+.badge-whisper { background: rgba(22,161,168,0.08); color: #0f766e; border: 1px solid rgba(22,161,168,0.15); }
+.badge-rag { background: rgba(98,124,69,0.08); color: #4d6636; border: 1px solid rgba(98,124,69,0.15); }
+.badge-bulb { background: rgba(224,160,74,0.08); color: #7a5f1e; border: 1px solid rgba(224,160,74,0.15); cursor: pointer; user-select: none; }
+
+.tag {
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  background: rgba(255,250,240,0.5);
+}
+
+h3 { font-size: 22px; font-weight: 900; margin: 10px 0 4px; }
+.subtitle { color: var(--violet); font-weight: 600; font-size: 13px; margin-bottom: 12px; }
+.desc { max-width: 620px; line-height: 1.6; color: var(--text-mid); font-size: 14px; margin-bottom: 14px; }
+
+/* ─── BULB ─── */
+.bulb-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.bulb-svg { width: 36px; height: 48px; cursor: pointer; transition: transform 0.2s; }
+.bulb-svg:hover { transform: scale(1.1); }
+.bulb-svg.on #bulb-glass { fill: rgba(251,191,36,0.35); stroke: #f59e0b; }
+.bulb-svg.on #bulb-filament { stroke: #fef3c7; }
+.bulb-svg.on #bulb-glow-el { opacity: 0.35; }
+.bulb-label { font-size: 12px; color: var(--muted); font-weight: 600; cursor: pointer; user-select: none; }
+.bulb-label.on { color: #b45309; }
+
+/* ─── TIMELINE ─── */
+.timeline-wrap { position: relative; padding-left: 48px; }
+.timeline-track {
+  position: absolute; left: 15px; top: 0; bottom: 0;
+  width: 2px; background: var(--line); border-radius: 1px;
+}
+.timeline-fill {
+  position: absolute; left: 15px; top: 0;
+  width: 2px; height: 0%;
+  background: linear-gradient(180deg, var(--violet), var(--cyan));
+  border-radius: 1px; transition: height 0.05s linear;
+}
+.tl-entry { position: relative; padding-bottom: 56px; }
+.tl-entry:last-child { padding-bottom: 0; }
+.tl-node {
+  position: absolute; left: -36px; top: 6px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  transition: all 0.5s ease; z-index: 2;
+}
+.tl-node.lit { border-color: var(--violet); background: var(--violet); box-shadow: 0 0 0 4px rgba(61,74,125,0.15); }
+.tl-year { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 4px; }
+.tl-entry.lit .tl-year { color: var(--violet); }
+.tl-company { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 4px; }
+.tl-kind { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.tl-body p { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 6px; }
+
+/* ─── SKILLS ─── */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.skill-cell { background: var(--surface); padding: 24px 28px; }
+.skill-label { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.skill-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.skill-body .hl { color: var(--violet); font-weight: 600; }
+
+/* ─── EDUCATION ─── */
+.edu-block { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+.edu-school { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 4px; }
+.edu-major { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.edu-date { font-size: 12px; color: var(--text-mid); margin-top: 10px; }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 48px 0 56px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer .f-links { display: flex; gap: 20px; }
+footer .f-links a {
+  font-size: 14px; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+footer .f-links a:hover { color: var(--ink); }
+footer .f-note { font-size: 12px; color: var(--muted); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 700px) {
+  .work-card { flex-direction: column; align-items: flex-start; padding: 28px; gap: 20px; }
+  .page { padding: 0 16px; }
+  .skills-grid { grid-template-columns: 1fr; }
+  nav .links a { font-size: 11px; padding: 5px 8px; }
+  .hero-stats { gap: 24px; }
+  .hero { padding: 100px 0 40px; }
+  section { padding: 48px 0; }
+  .tl-company { font-size: 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .s { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
-<div class="page">
-  <p class="eyebrow">Section by section</p>
-  <h1>Husni Sarafi</h1>
-  <p class="lede">Building the portfolio piece by piece. Each section below is a standalone component — viewable, tweakable, then assembled into the final page.</p>
 
-  <div class="section-list">
-    <a class="section-card" href="husni-cards.html">
-      <div>
-        <h3>Showcase Cards — Husni's Design</h3>
-        <p>Vertical stack with 3D floating icons on hover, badges, interactive bulb</p>
-      </div>
-      <span class="badge badge-new">Latest · View</span>
-    </a>
-    <a class="section-card" href="sigma-cards-v2.html">
-      <div>
-        <h3>Showcase Cards — Sigma V2</h3>
-        <p>Project showcase cards with displacement ripple hover effect, badges, interactive bulb</p>
-      </div>
-      <span class="badge">V2 · View</span>
-    </a>
-    <a class="section-card" href="sigma-cards-v1.html">
-      <div>
-        <h3>Card Deck — Sigma V1</h3>
-        <p>Selected Work cards with badges, grid/stack toggle, interactive bulb</p>
-      </div>
-      <span class="badge">V1 · View</span>
-    </a>
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">HS</div>
+  <div class="links">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
   </div>
+</nav>
 
-  <hr>
+<!-- HERO -->
+<section class="hero" id="home">
+  <p class="hero-label s">AI Automation Engineer</p>
+  <h1 class="s" data-delay="0.1">Building AI systems that run themselves — and keep running.</h1>
+  <p class="hero-sub s" data-delay="0.2">
+    I design self-hosted AI pipelines, autonomous agents, and production automation from Kuala Lumpur. Three years in enterprise RPA, now shipping LLM-powered tools that work in real environments.
+  </p>
+  <div class="hero-actions s" data-delay="0.3">
+    <a class="btn btn-primary" href="#work">Explore work</a>
+    <a class="btn btn-secondary" href="mailto:husnisarafi17@gmail.com">Start a conversation</a>
+  </div>
+  <div class="hero-stats s" data-delay="0.35">
+    <div><div class="stat-val">3<span class="u">yrs</span></div><div class="stat-label">automation & AI engineering</div></div>
+    <div><div class="stat-val">99<span class="u">%</span></div><div class="stat-label">agent fleet uptime</div></div>
+    <div><div class="stat-val">5</div><div class="stat-label">AI projects shipped</div></div>
+    <div><div class="stat-val">24/7</div><div class="stat-label">autonomous agent fleet</div></div>
+  </div>
+</section>
 
-  <p class="footer-text">More sections coming as we build them.</p>
-</div>
+<!-- WORK CARDS -->
+<section id="work">
+  <div class="sec-head s"><p class="sec-label">Selected Work</p><h2 class="sec-title">What I've built</h2></div>
+  <div class="work-stack" id="work-stack"></div>
+</section>
+
+<!-- EXPERIENCE TIMELINE -->
+<section id="experience">
+  <div class="sec-head s">
+    <p class="sec-label">Experience</p>
+    <h2 class="sec-title">Where I've shipped</h2>
+  </div>
+  <div class="timeline-wrap" id="timeline-wrap">
+    <div class="timeline-track"></div>
+    <div class="timeline-fill" id="timeline-fill"></div>
+
+    <div class="tl-entry s">
+      <div class="tl-node"></div>
+      <div class="tl-year">2023</div>
+      <div class="tl-company">IBM Malaysia</div>
+      <div class="tl-kind">Process Delivery Specialist · AutomationAnywhere · AR</div>
+      <div class="tl-body">
+        <p><strong>Process Delivery Specialist</strong> — Accounts Receivable for the Vietnamese market. Started as end user monitoring live AutomationAnywhere robots, then built VBA scripts that contributed to live automation development.</p>
+      </div>
+    </div>
+
+    <div class="tl-entry s">
+      <div class="tl-node"></div>
+      <div class="tl-year">2024</div>
+      <div class="tl-company">E-Outsource Asia</div>
+      <div class="tl-kind">Associate Consultant · UiPath · AutomationAnywhere</div>
+      <div class="tl-body">
+        <p><strong>Associate Consultant</strong> — primary RPA developer. End-to-end process ownership. Designed LOMAS logistics automation, built e-invoice pipeline from SAP ERP to IRBM-mandated format, developed Excel macros for Purchase Order processing.</p>
+      </div>
+    </div>
+
+    <div class="tl-entry s">
+      <div class="tl-node"></div>
+      <div class="tl-year">2026</div>
+      <div class="tl-company">Ernst & Young</div>
+      <div class="tl-kind">RPA Consultant · BluePrism · Utility sector</div>
+      <div class="tl-body">
+        <p><strong>RPA Consultant</strong> — managing BluePrism processes for a national utility provider's billing and AMI operations. Monitors robot health, triages failures, ensures process stability across high-volume workflows. Self-hosted AI projects accelerate alongside.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-head s"><p class="sec-label">Capabilities</p><h2 class="sec-title">What I work with</h2></div>
+  <div class="skills-grid s">
+    <div class="skill-cell">
+      <div class="skill-label">AI & LLMs</div>
+      <div class="skill-body">Whisper STT, Ollama (local LLMs), <span class="hl">RAG with ChromaDB</span>, prompt engineering, bilingual MY/EN NLP. Running autonomous agents 24/7.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-label">Languages</div>
+      <div class="skill-body">Python (primary), JavaScript, PowerShell, SQL. HTML/CSS/JS for frontend. <span class="hl">Python</span> for all AI pipelines and automation.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-label">Cloud & Infra</div>
+      <div class="skill-body">Docker, Oracle Cloud, SSH tunneling, <span class="hl">FastAPI</span> backends. Self-hosted inference servers with 99% uptime.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-label">RPA Platforms</div>
+      <div class="skill-body">Production across <span class="hl">BluePrism, UiPath, AutomationAnywhere</span> — discovery to deployment at enterprise scale.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-head s"><p class="sec-label">Education</p><h2 class="sec-title">Foundation</h2></div>
+  <div class="edu-block s">
+    <div class="edu-school">UiTM Shah Alam</div>
+    <div class="edu-major">BSc (Hons) Actuarial Science</div>
+    <div class="edu-date">Graduated 2022</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="f-links">
+    <a href="https://github.com/j00bi" target="_blank">GitHub</a>
+    <a href="https://x.com/whoshusni" target="_blank">X</a>
+    <a href="mailto:husnisarafi17@gmail.com">Email</a>
+  </div>
+  <div class="f-note">Built with intention.</div>
+</footer>
+
+<script>
+// ─── PROJECT DATA ───
+const projects = [
+  { title: "Agent Harness", subtitle: "Autonomous AI operations",
+    desc: "Daily autonomous AI assistant running 24/7 — scheduled cron jobs, multi-agent delegation, cross-platform messaging, and MCP tool integration. Powers a fleet of 4 Freqtrade trading agents managing personal workflow automation end-to-end.",
+    badges: [{ text: "Hermes", cls: "badge-hermes" }, { text: "OpenClaw", cls: "badge-openclaw" }],
+    tags: ["Python", "LLM APIs", "Cron", "MCP", "Freqtrade"], icon: "public/badges/agent-harness-3d.png" },
+  { title: "Meeting Min", subtitle: "Bilingual AI transcription",
+    desc: "Self-hosted meeting intelligence for locked-down corporate environments. Captures Teams audio, transcribes Malay-English speech via Whisper, generates structured summaries with local LLMs. Deployed through SSH tunneling.",
+    badges: [{ text: "Whisper STT", cls: "badge-whisper" }, { text: "Ollama", cls: "badge-whisper" }],
+    tags: ["Whisper", "Ollama", "Docker", "SSH", "Python"], icon: "public/badges/meeting-min-3d.png" },
+  { title: "RAG Demo", subtitle: "Retrieval-augmented generation",
+    desc: "Full-stack RAG pipeline: document ingestion into ChromaDB vector store, semantic retrieval with local embeddings, and LLM-powered answer generation via Ollama. FastAPI backend, Docker-deployed on Oracle Cloud.",
+    badges: [{ text: "ChromaDB", cls: "badge-rag" }, { text: "FastAPI", cls: "badge-rag" }],
+    tags: ["ChromaDB", "Ollama", "FastAPI", "Docker", "Oracle Cloud"], icon: "public/badges/rag-demo-3d.png" },
+  { title: "Yeelight Backlight", subtitle: "Realtime physical automation",
+    desc: "Realtime screen-edge colour sampling piped to Yeelight bulbs over LAN TCP. Six iterations solving TCP buffer overflow with threaded sender + drop queue, temporal smoothing, dark mode fallback, and adaptive rate limiting.",
+    badges: [{ text: "Bulb", cls: "badge-bulb" }],
+    tags: ["Python", "NumPy", "TCP", "MSS", "LAN"], icon: "public/badges/yeelight-3d.png", yeelight: true }
+];
+
+const container = document.getElementById("work-stack");
+let bulbOn = false;
+
+function toggleBulb() {
+  bulbOn = !bulbOn;
+  const svg = document.getElementById("bulb-svg");
+  const label = document.getElementById("bulb-label");
+  const badge = document.querySelector(".badge-bulb");
+  if (svg) svg.classList.toggle("on", bulbOn);
+  if (label) { label.textContent = bulbOn ? "💡 On" : "Click to toggle"; label.classList.toggle("on", bulbOn); }
+  if (badge) badge.textContent = bulbOn ? "💡 On" : "Bulb";
+}
+
+projects.forEach(p => {
+  const card = document.createElement("div"); card.className = "work-card";
+  const badgesHtml = p.badges.map(b => `<span class="badge ${b.cls}">${b.text}</span>`).join("");
+  let extra = "";
+  if (p.yeelight) {
+    extra = `<div class="bulb-row">
+      <svg class="bulb-svg" id="bulb-svg" viewBox="0 0 40 52" fill="none" onclick="toggleBulb()">
+        <defs><radialGradient id="bg" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#fbbf24" stop-opacity="0.4"/><stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/></radialGradient></defs>
+        <circle id="bulb-glow-el" cx="20" cy="18" r="22" fill="url(#bg)" opacity="0"/>
+        <path id="bulb-glass" d="M12 22C12 14 15 10 20 10C25 10 28 14 28 22L26 30C26 32 24 34 20 34C16 34 14 32 14 30L12 22Z" fill="rgba(16,17,20,0.06)" stroke="rgba(16,17,20,0.15)" stroke-width="1.5"/>
+        <path id="bulb-filament" d="M18 18L20 23L22 18" stroke="rgba(16,17,20,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="16" y="34" width="8" height="7" rx="2" fill="#6f6a5f"/>
+      </svg>
+      <span class="bulb-label" id="bulb-label" onclick="toggleBulb()">Click to toggle</span>
+    </div>`;
+  }
+  card.innerHTML = `
+    <div class="icon-3d-wrap"><div class="icon-3d"><img src="${p.icon}" alt="${p.title}"></div></div>
+    <div class="content">
+      <div class="badges">${badgesHtml}</div>
+      ${extra}
+      <h3>${p.title}</h3>
+      <p class="subtitle">${p.subtitle}</p>
+      <p class="desc">${p.desc}</p>
+      <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+    </div>`;
+  container.appendChild(card);
+});
+
+// ─── SCROLL ANIMATIONS ───
+(() => {
+  const els = document.querySelectorAll('.s');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { els.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; }); return; }
+
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+  function update() {
+    const vh = window.innerHeight;
+    const trigger = vh * 0.88;
+    els.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const delay = parseFloat(el.dataset.delay || 0) * 1000;
+      const raw = (trigger - rect.top) / (vh * 0.75);
+      const p = ease(clamp01(raw - delay));
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1-p)*30}px)`;
+    });
+
+    // Timeline
+    const wrap = document.getElementById('timeline-wrap');
+    const fill = document.getElementById('timeline-fill');
+    if (wrap) {
+      const wr = wrap.getBoundingClientRect();
+      const sp = clamp01((vh * 0.6 - wr.top) / (wr.height + vh * 0.4));
+      if (fill) fill.style.height = (sp * 100) + '%';
+      document.querySelectorAll('.tl-entry').forEach((entry, i) => {
+        const er = entry.getBoundingClientRect();
+        const np = clamp01((vh * 0.7 - (er.top + 20)) / (vh * 0.3));
+        const node = entry.querySelector('.tl-node');
+        if (node) { entry.classList.toggle('lit', np > 0.1); node.classList.toggle('lit', np > 0.1); }
+      });
+    }
+
+    // Nav
+    const nav = document.getElementById('nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+
+    // Active nav link
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('nav .links a');
+    let current = '';
+    sections.forEach(sec => { if (sec.getBoundingClientRect().top < vh * 0.4) current = sec.id; });
+    links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + current));
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; } }, { passive: true });
+  update();
+})();
+</script>
 </body>
 </html>
