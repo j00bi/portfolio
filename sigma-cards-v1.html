@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sigma Card Deck — V1</title>
+<style>
+  :root {
+    --ink: #101114;
+    --paper: #f7f3e8;
+    --surface: #fffaf0;
+    --line: #d8d0bd;
+    --muted: #6f6a5f;
+    --cyan: #16a1a8;
+    --red: #c74735;
+    --green: #627c45;
+    --violet: #3d4a7d;
+    --amber: #e0a04a;
+    --shadow: 0 28px 80px rgba(31, 28, 20, 0.18);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    padding: 60px 40px;
+    background:
+      linear-gradient(90deg, rgba(16, 17, 20, 0.035) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(16, 17, 20, 0.035) 1px, transparent 1px),
+      var(--paper);
+    background-size: 44px 44px;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 0.98;
+    margin-bottom: 40px;
+  }
+
+  /* ---- Card Deck ---- */
+  .card-deck {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .card {
+    border: 1px solid rgba(16, 17, 20, 0.12);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 8px 40px rgba(31, 28, 20, 0.10);
+    overflow: hidden;
+    transition: transform 280ms ease, box-shadow 280ms ease;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(31, 28, 20, 0.16);
+  }
+
+  /* ---- Badge Strip ---- */
+  .badge-strip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px 4px 6px;
+    border: 1px solid rgba(16, 17, 20, 0.10);
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+
+  .badge img,
+  .badge svg {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
+  .badge-hermes {
+    border-color: rgba(34, 211, 238, 0.3);
+    background: rgba(34, 211, 238, 0.06);
+    color: #0e7490;
+  }
+
+  .badge-openclaw {
+    border-color: rgba(248, 228, 172, 0.4);
+    background: rgba(248, 228, 172, 0.10);
+    color: #8b6f3a;
+  }
+
+  .badge-whisper {
+    border-color: rgba(22, 161, 168, 0.3);
+    background: rgba(22, 161, 168, 0.07);
+    color: #0f766e;
+  }
+
+  .badge-rag {
+    border-color: rgba(98, 124, 69, 0.3);
+    background: rgba(98, 124, 69, 0.07);
+    color: #4d6636;
+  }
+
+  .badge-bulb {
+    border-color: rgba(224, 160, 74, 0.3);
+    background: rgba(224, 160, 74, 0.07);
+    color: #8b691e;
+  }
+
+  /* ---- Card Body ---- */
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-name {
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .card-signal {
+    color: var(--violet);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .card-desc {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .card-stack span {
+    padding: 3px 8px;
+    border: 1px solid rgba(16, 17, 20, 0.08);
+    border-radius: 4px;
+    background: var(--paper);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ---- Bulb (Yeelight) ---- */
+  .bulb-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin: -10px 0 6px;
+  }
+
+  .bulb {
+    width: 52px;
+    height: 70px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 200ms ease;
+  }
+
+  .bulb:hover {
+    transform: scale(1.1);
+  }
+
+  .bulb-glass {
+    width: 40px;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 50% 50% 40% 40%;
+    background: rgba(16, 17, 20, 0.06);
+    border: 2px solid rgba(16, 17, 20, 0.12);
+    position: relative;
+    transition: background 400ms ease, box-shadow 400ms ease;
+  }
+
+  .bulb.on .bulb-glass {
+    background: #fbbf24;
+    border-color: #f59e0b;
+    box-shadow:
+      0 0 20px rgba(251, 191, 36, 0.4),
+      0 0 60px rgba(251, 191, 36, 0.15),
+      inset 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .bulb-base {
+    width: 16px;
+    height: 12px;
+    margin: 0 auto;
+    background: var(--muted);
+    border-radius: 0 0 3px 3px;
+  }
+
+  .bulb-filament {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 16px;
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+
+  .bulb.on .bulb-filament {
+    opacity: 0.7;
+  }
+
+  .bulb-filament::before,
+  .bulb-filament::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 14px;
+    background: #fef3c7;
+    border-radius: 1px;
+  }
+
+  .bulb-filament::before {
+    transform: rotate(-15deg);
+    left: -5px;
+    top: 1px;
+  }
+
+  .bulb-filament::after {
+    transform: rotate(15deg);
+    left: 5px;
+    top: 1px;
+  }
+
+  .bulb-glow {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+
+  .bulb.on .bulb-glow {
+    opacity: 0.25;
+    background: radial-gradient(circle, #fbbf24, transparent 70%);
+  }
+
+  .bulb-label {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* ---- Transition effect (stacked) ---- */
+  .card-deck-stacked {
+    position: relative;
+    min-height: 360px;
+  }
+
+  .card-stacked {
+    position: absolute;
+    width: 100%;
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 300ms ease;
+    transform-origin: center bottom;
+  }
+
+  .card-stacked:nth-child(1) { z-index: 4; }
+  .card-stacked:nth-child(2) { z-index: 3; }
+  .card-stacked:nth-child(3) { z-index: 2; }
+  .card-stacked:nth-child(4) { z-index: 1; }
+
+  /* ---- Controls ---- */
+  .deck-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .deck-nav button {
+    padding: 8px 16px;
+    border: 1px solid rgba(16, 17, 20, 0.12);
+    border-radius: 999px;
+    background: var(--surface);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 180ms ease;
+  }
+
+  .deck-nav button.active {
+    border-color: var(--violet);
+    background: var(--violet);
+    color: white;
+  }
+
+  .deck-nav button:hover:not(.active) {
+    background: rgba(16, 17, 20, 0.05);
+  }
+
+  /* ---- Two layout modes ---- */
+  .layout-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .layout-toggle button {
+    padding: 6px 14px;
+    border: 1px solid rgba(16, 17, 20, 0.12);
+    border-radius: 6px;
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 180ms ease;
+  }
+
+  .layout-toggle button.active {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 760px) {
+    .card-deck { grid-template-columns: 1fr; }
+    body { padding: 30px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="eyebrow">Sigma V1</p>
+  <h2>Selected Work</h2>
+
+  <div class="layout-toggle">
+    <button class="active" data-layout="grid" onclick="setLayout('grid')">Grid</button>
+    <button data-layout="stack" onclick="setLayout('stack')">Stack</button>
+  </div>
+
+  <!-- Grid Layout -->
+  <div id="grid-layout" class="card-deck">
+    <div class="card" data-project="agent-harness">
+      <div class="badge-strip">
+        <span class="badge badge-hermes">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='224' fill='%2307080D'/%3E%3Cpath d='M512 238C585 320 633 394 633 491C633 604 575 681 512 776C449 681 391 604 391 491C391 394 439 320 512 238Z' fill='%23071018' stroke='%23F8E4AC' stroke-width='12'/%3E%3Cpath d='M512 345C557 401 582 447 582 505C582 570 552 619 512 678C472 619 442 570 442 505C442 447 467 401 512 345Z' fill='%23071018' stroke='%2322D3EE' stroke-width='10'/%3E%3Cpath d='M512 301V716' stroke='%23F8E4AC' stroke-width='18'/%3E%3Cpath d='M454 462C488 438 536 438 570 462' stroke='%23F8E4AC' stroke-width='16'/%3E%3Cpath d='M454 532C488 556 536 556 570 532' stroke='%23F8E4AC' stroke-width='16'/%3E%3C/svg%3E" alt="">
+          Hermes
+        </span>
+        <span class="badge badge-openclaw">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='56' fill='%23FF6B35' stroke='%23E55A2B' stroke-width='4'/%3E%3Cpath d='M35 65 Q45 35 65 40 Q85 45 80 70 Q75 95 50 85 Q30 75 35 65Z' fill='%23FF8C5A' stroke='%23E55A2B' stroke-width='3'/%3E%3C/svg%3E" alt="">
+          OpenClaw
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Agent Harness</div>
+        <div class="card-signal">Autonomous AI operations</div>
+        <div class="card-desc">Daily autonomous AI assistant running 24/7 — scheduled cron jobs, multi-agent delegation, cross-platform messaging, and MCP tool integration. Powers a fleet of 4 Freqtrade trading agents managing personal workflow automation end-to-end.</div>
+        <div class="card-stack">
+          <span>Python</span><span>LLM APIs</span><span>Cron</span><span>MCP</span><span>Freqtrade</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-project="meeting-min">
+      <div class="badge-strip">
+        <span class="badge badge-whisper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+          Whisper STT
+        </span>
+        <span class="badge badge-whisper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          Ollama
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Meeting Min</div>
+        <div class="card-signal">Bilingual AI transcription</div>
+        <div class="card-desc">Self-hosted meeting intelligence for locked-down corporate environments. Captures Teams audio locally, transcribes Malay-English speech via Whisper, generates structured summaries with local LLMs. Deployed through SSH tunneling to a remote inference server.</div>
+        <div class="card-stack">
+          <span>Whisper</span><span>Ollama</span><span>Docker</span><span>SSH</span><span>Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-project="rag-demo">
+      <div class="badge-strip">
+        <span class="badge badge-rag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          ChromaDB
+        </span>
+        <span class="badge badge-rag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          FastAPI
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">RAG Demo</div>
+        <div class="card-signal">Retrieval-augmented generation</div>
+        <div class="card-desc">Full-stack RAG pipeline: document ingestion into ChromaDB vector store, semantic retrieval with local embeddings, and LLM-powered answer generation via Ollama. FastAPI backend, Docker-deployed on Oracle Cloud.</div>
+        <div class="card-stack">
+          <span>ChromaDB</span><span>Ollama</span><span>FastAPI</span><span>Docker</span><span>Oracle Cloud</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-project="yeelight">
+      <div class="badge-strip">
+        <span class="badge badge-bulb" id="bulb-badge" style="cursor:pointer" onclick="toggleBulb()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18h6"/><path d="M10 22h4"/>
+            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
+          </svg>
+          <span id="bulb-status-text">Click to toggle</span>
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="bulb-area">
+          <div class="bulb" id="bulb" onclick="toggleBulb()">
+            <div class="bulb-glow" id="bulb-glow"></div>
+            <div class="bulb-glass" id="bulb-glass">
+              <div class="bulb-filament" id="bulb-filament"></div>
+            </div>
+            <div class="bulb-base"></div>
+            <div class="bulb-label">Tap bulb to toggle</div>
+          </div>
+        </div>
+        <div class="card-name">Yeelight Backlight</div>
+        <div class="card-signal">Realtime physical automation</div>
+        <div class="card-desc">Realtime screen-edge colour sampling piped to Yeelight bulbs over LAN TCP. Six iterations solving TCP buffer overflow with threaded sender + drop queue, temporal smoothing, dark mode fallback, and adaptive rate limiting.</div>
+        <div class="card-stack">
+          <span>Python</span><span>NumPy</span><span>TCP</span><span>MSS</span><span>LAN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stack Layout -->
+  <div id="stack-layout" class="card-deck-stacked hidden">
+    <div class="deck-nav" id="stack-nav">
+      <button class="active" data-idx="0" onclick="showStackCard(0)">Agent Harness</button>
+      <button data-idx="1" onclick="showStackCard(1)">Meeting Min</button>
+      <button data-idx="2" onclick="showStackCard(2)">RAG Demo</button>
+      <button data-idx="3" onclick="showStackCard(3)">Yeelight</button>
+    </div>
+    <!-- Cards are cloned from grid via JS -->
+    <div id="stack-container"></div>
+  </div>
+</div>
+
+<script>
+let bulbOn = false;
+
+function toggleBulb() {
+  bulbOn = !bulbOn;
+  document.getElementById('bulb').classList.toggle('on', bulbOn);
+  document.getElementById('bulb-status-text').textContent = bulbOn ? '💡 On' : 'Click to toggle';
+}
+
+// Stack layout — clone grid cards
+function initStack() {
+  const container = document.getElementById('stack-container');
+  const gridCards = document.querySelectorAll('#grid-layout .card');
+  container.innerHTML = '';
+  gridCards.forEach((card, i) => {
+    const clone = card.cloneNode(true);
+    clone.className = 'card card-stacked';
+    clone.style.transform = `translateY(${i * 6}px) scale(${1 - i * 0.03})`;
+    clone.style.opacity = i === 0 ? 1 : 0.7 - i * 0.12;
+    clone.setAttribute('data-stack-idx', i);
+    container.appendChild(clone);
+  });
+}
+
+function showStackCard(idx) {
+  const cards = container.querySelectorAll('.card-stacked');
+  cards.forEach((card, i) => {
+    const offset = i - idx;
+    card.style.transform = `translateY(${offset * 8}px) scale(${Math.max(0.7, 1 - Math.abs(offset) * 0.06)})`;
+    card.style.opacity = Math.max(0.3, 1 - Math.abs(offset) * 0.25);
+    card.style.zIndex = cards.length - Math.abs(offset);
+    card.style.pointerEvents = i === idx ? 'auto' : 'none';
+  });
+  document.querySelectorAll('#stack-nav button').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.idx) === idx);
+  });
+}
+
+let layout = 'grid';
+const container = document.getElementById('stack-container');
+
+function setLayout(l) {
+  layout = l;
+  document.getElementById('grid-layout').classList.toggle('hidden', l !== 'grid');
+  document.getElementById('stack-layout').classList.toggle('hidden', l !== 'stack');
+  document.querySelectorAll('.layout-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.layout === l);
+  });
+  if (l === 'stack' && container.children.length === 0) initStack();
+  if (l === 'stack') showStackCard(0);
+}
+
+initStack();
+showStackCard(0);
+</script>
+</body>
+</html>

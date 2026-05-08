@@ -1,14 +1,843 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Husni Sarafi - RPA consultant and AI automation engineer." />
-    <title>Husni Sarafi - Portfolio</title>
-    <script type="module" crossorigin src="./assets/index-ONUei7th.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C9syi_T7.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Husni Sarafi — RPA Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c0c0c;
+  --surface: #131313;
+  --card: #171717;
+  --border: #1f1f1f;
+  --border-lit: #2a2520;
+  --text: #e8e4dc;
+  --text-dim: #6d6862;
+  --text-mid: #a09a92;
+  --accent: #e0a04a;
+  --accent-soft: #c4883e;
+  --glow: rgba(224, 160, 74, 0.15);
+  --glow-strong: rgba(224, 160, 74, 0.35);
+  --radius: 10px;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: auto; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { opacity: 0.75; }
+.hl { color: var(--accent); font-weight: 400; }
+.em { font-style: italic; color: var(--accent-soft); }
+
+/* ═══════════════════════════════════════
+   SCROLL-DRIVEN FADE
+   Every .s element fades in based on
+   how far it has scrolled into view.
+   ═══════════════════════════════════════ */
+
+.s {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: opacity, transform;
+  transition: none; /* driven by JS */
+}
+
+/* ═══════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════ */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 12, 12, 0.6);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s;
+}
+
+nav.scrolled { border-bottom-color: var(--border); }
+
+nav .logo {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+nav .links { display: flex; gap: 28px; }
+
+nav .links a {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+nav .links a:hover { color: var(--text); opacity: 1; }
+
+nav .links a.active { color: var(--accent); opacity: 1; }
+
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  nav .links { gap: 16px; }
+  nav .links a { font-size: 0.7rem; }
+}
+
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 32px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.hero-label {
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* Each letter of the name */
+.hero h1 .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero h1 .char.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accent line that draws under the name */
+.hero-line {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin-bottom: 28px;
+  border-radius: 1px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+}
+
+.hero-line.in { width: 80px; }
+
+.hero .subtitle {
+  font-size: 1.15rem;
+  color: var(--text-mid);
+  max-width: 540px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.stat-val {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-val .u {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  margin-left: 1px;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 100px 20px 60px; }
+  .hero-stats { gap: 28px; }
+  .stat-val { font-size: 1.8rem; }
+}
+
+/* ═══════════════════════════════════════
+   CONTENT
+   ═══════════════════════════════════════ */
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 120px;
+}
+
+@media (max-width: 640px) {
+  .content { padding: 0 20px 80px; }
+}
+
+/* ═══════════════════════════════════════
+   SECTION HEADER
+   ═══════════════════════════════════════ */
+
+.sec-head {
+  margin-bottom: 48px;
+  padding-top: 80px;
+}
+
+.sec-label {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.sec-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  max-width: 520px;
+  margin-top: 12px;
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════
+   TIMELINE — the centerpiece
+   ═══════════════════════════════════════ */
+
+.timeline-wrap {
+  position: relative;
+  padding-left: 48px;
+}
+
+/* The track — always visible, dim */
+.timeline-track {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+  border-radius: 1px;
+}
+
+/* The fill — grows from top based on scroll progress */
+.timeline-fill {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--accent), var(--accent-soft));
+  border-radius: 1px;
+  transition: height 0.05s linear;
+  box-shadow: 0 0 8px var(--glow);
+}
+
+.tl-entry {
+  position: relative;
+  padding-bottom: 72px;
+}
+
+.tl-entry:last-child { padding-bottom: 0; }
+
+/* Node dot — centered on track (track center = 16px) */
+.tl-node {
+  position: absolute;
+  left: -38px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+/* When lit */
+.tl-node.lit {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--glow), 0 0 16px var(--glow-strong);
+}
+
+.tl-year {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-bottom: 6px;
+  transition: color 0.5s;
+}
+
+.tl-entry.lit .tl-year { color: var(--accent); }
+
+.tl-company {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.tl-kind {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.tl-body p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.tl-body p:last-child { margin-bottom: 0; }
+
+.tl-body strong { color: var(--text); font-weight: 500; }
+
+/* ═══════════════════════════════════════
+   PROJECTS GRID
+   ═══════════════════════════════════════ */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
+
+.proj-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.proj-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, var(--glow), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.proj-card:hover {
+  border-color: var(--border-lit);
+  transform: translateY(-3px);
+}
+
+.proj-card:hover::before { opacity: 1; }
+
+.proj-card > * { position: relative; z-index: 1; }
+
+.proj-name {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.proj-tech {
+  font-size: 0.7rem;
+  color: var(--accent-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.proj-desc {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════
+   SKILLS
+   ═══════════════════════════════════════ */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}
+
+.skill-cell {
+  background: var(--card);
+  padding: 24px 28px;
+  transition: background 0.3s;
+}
+
+.skill-cell:hover { background: #1a1a1a; }
+
+.skill-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.skill-body {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════
+   EDUCATION
+   ═══════════════════════════════════════ */
+
+.edu-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.edu-school {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.edu-major {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.edu-date {
+  font-size: 0.75rem;
+  color: var(--text-mid);
+  margin-top: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+
+footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 60px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  footer { padding: 0 20px 40px; }
+}
+
+footer .f-links { display: flex; gap: 24px; }
+
+footer .f-links a {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  transition: color 0.3s;
+}
+
+footer .f-links a:hover { color: var(--accent); opacity: 1; }
+
+footer .f-note {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .s { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">HS</div>
+  <div class="links">
+    <a href="#experience">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <p class="hero-label s" data-delay="0">RPA Consultant · Automation Engineer</p>
+  <h1 class="s" data-delay="0.1">Husni Sarafi</h1>
+  <p class="subtitle s" data-delay="0.2">
+    Building and scaling automation at EY. From monitoring robots at IBM to
+    shipping end-to-end RPA solutions — now exploring <span class="hl">agentic AI</span>
+    as the next frontier beyond rule-based systems.
+  </p>
+  <div class="hero-stats s" data-delay="0.3">
+    <div>
+      <div class="stat-val">3<span class="u">yrs</span></div>
+      <div class="stat-label">automation & delivery</div>
+    </div>
+    <div>
+      <div class="stat-val">50<span class="u">%</span></div>
+      <div class="stat-label">robot productivity lift</div>
+    </div>
+    <div>
+      <div class="stat-val">99<span class="u">%</span></div>
+      <div class="stat-label">workflow uptime</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- EXPERIENCE — Timeline -->
+  <section id="experience">
+    <div class="sec-head s">
+      <p class="sec-label">Experience</p>
+      <h2 class="sec-title">Where I've shipped</h2>
+      <p class="sec-desc">Three years of progressively deeper automation work — from watching robots run to designing the systems they power.</p>
+    </div>
+
+    <div class="timeline-wrap" id="timeline-wrap">
+      <div class="timeline-track"></div>
+      <div class="timeline-fill" id="timeline-fill"></div>
+
+      <div class="tl-entry s" data-delay="0">
+        <div class="tl-node" id="node-1"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-company">IBM Malaysia</div>
+        <div class="tl-kind">Process Delivery Specialist · AutomationAnywhere · Accounts Receivable</div>
+        <div class="tl-body">
+          <p><strong>Process Delivery Specialist</strong> — Accounts Receivable, serving the Vietnamese market. Initially an end user, then assigned to <span class="hl">monitor live AutomationAnywhere robots</span> supporting the operations team.</p>
+          <p>Observed how senior developers combined <span class="hl">RPA with Excel macros</span> to automate AR workflows — invoice processing, payment reconciliation, aging reports. Started experimenting with VBA, built scripts that caught the team's attention, and eventually contributed to <span class="hl">live automation development</span>.</p>
+        </div>
+      </div>
+
+      <div class="tl-entry s" data-delay="0">
+        <div class="tl-node" id="node-2"></div>
+        <div class="tl-year">2024</div>
+        <div class="tl-company">E-Outsource Asia</div>
+        <div class="tl-kind">Associate Consultant · UiPath · AutomationAnywhere</div>
+        <div class="tl-body">
+          <p><strong>Associate Consultant</strong> — primary RPA developer. End-to-end ownership: process discovery, solution design, development, deployment, and post-launch monitoring across multiple client engagements.</p>
+          <p>Designed and shipped LOMAS (Logistics Management System) automation — tracking import/export liners, updating shipment plans, integrating SQL databases and APIs into robot workflows. Built e-invoice pipeline extracting data from SAP ERP, transforming to IRBM-mandated format, uploading via middleware.</p>
+        </div>
+      </div>
+
+      <div class="tl-entry s" data-delay="0">
+        <div class="tl-node" id="node-3"></div>
+        <div class="tl-year">2026</div>
+        <div class="tl-company">Ernst & Young</div>
+        <div class="tl-kind">RPA Consultant · BluePrism · Utility sector</div>
+        <div class="tl-body">
+          <p><strong>RPA Consultant — Associate</strong>, assigned to a national utility provider engagement. Managing and monitoring BluePrism processes across billing and advanced metering infrastructure (AMI) operations.</p>
+          <p>Handles a portfolio of live BP processes including SMART Meter Billing and AMI data pipelines. Monitors robot health, triages failures, and ensures process stability across high-volume transactional workflows. Agentic AI exploration accelerates.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-head s">
+      <p class="sec-label">Projects</p>
+      <h2 class="sec-title">Built outside work</h2>
+      <p class="sec-desc">Self-taught side projects driven by curiosity — audio, automotive, smart home, and the sky.</p>
+    </div>
+
+    <div class="projects-grid">
+      <div class="proj-card s">
+        <div class="proj-name">Meeting Min</div>
+        <div class="proj-tech">Python · Whisper · Ollama · SSH</div>
+        <p class="proj-desc">Self-hosted bilingual meeting minutes bot. Captures Teams audio, pipes through <span class="hl">Whisper</span> for STT (auto Malay/English), generates structured summaries via LLM. Audio captured locally, processed on remote server via SSH tunneling.</p>
+      </div>
+
+      <div class="proj-card s">
+        <div class="proj-name">Mazda AIO</div>
+        <div class="proj-tech">HTML · CSS · JS · React · Vite</div>
+        <p class="proj-desc">Custom speedometer dashboards and instrument cluster UIs for the <span class="hl">Mazda Connect CMU</span> head unit (2015 Mazda 2). Real-time driving data viz and React multi-screen app prototype on production hardware.</p>
+      </div>
+
+      <div class="proj-card s">
+        <div class="proj-name">Yeelight Backlight</div>
+        <div class="proj-tech">Python · NumPy · MSS · TCP</div>
+        <p class="proj-desc">Real-time monitor ambient lighting — captures screen edges, averages colors, sends to <span class="hl">Yeelight bslamp3</span> over LAN. 6 iterations solving TCP overflow, temporal smoothing, dark mode fallback.</p>
+      </div>
+
+      <div class="proj-card s">
+        <div class="proj-name">Celestial Clock</div>
+        <div class="proj-tech">HTML Canvas · JavaScript · REST API</div>
+        <p class="proj-desc">Full-screen canvas rendering a prayer-synced sky — gradients tied to Islamic prayer times via Aladhan API. <span class="hl">Sun arc</span>, moon phases, twinkling stars, mountain silhouettes.</p>
+      </div>
+
+      <div class="proj-card s">
+        <div class="proj-name">Bursa Sector Catalyst</div>
+        <div class="proj-tech">Research · Data Analysis</div>
+        <p class="proj-desc">Sector-based catalyst model for <span class="hl">Bursa Malaysia</span>. Applies actuarial probability thinking to stock market sector rotation. Early research phase.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head s">
+      <p class="sec-label">Skills</p>
+      <h2 class="sec-title">What I work with</h2>
+    </div>
+
+    <div class="skills-grid s">
+      <div class="skill-cell">
+        <div class="skill-label">RPA Platforms</div>
+        <div class="skill-body"><span class="em">BluePrism, UiPath, AutomationAnywhere</span> — process discovery to deployment and monitoring at enterprise scale.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-label">Integration</div>
+        <div class="skill-body">SQL databases, REST APIs, SAP ERP, IRBM middleware. <span class="em">End-to-end pipelines</span> from extraction to upload.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-label">Languages</div>
+        <div class="skill-body">Python, JavaScript, VB.Net, PowerShell, SQL. HTML/CSS/JS for frontend. <span class="em">Python</span> is the primary language.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-label">AI & LLMs</div>
+        <div class="skill-body">Whisper STT, Ollama, prompt engineering, bilingual NLP. Running Hermes as <span class="em">daily AI assistant</span> — exploring agentic workflows.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-label">Documentation</div>
+        <div class="skill-body">SOPs, FSD, SDD, SIT scripts, READMEs. Quarterly cycles at <span class="em">EOA</span> delivered consistently.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-head s">
+      <p class="sec-label">Education</p>
+      <h2 class="sec-title">Foundation</h2>
+    </div>
+    <div class="edu-block s">
+      <div class="edu-school">UiTM Shah Alam</div>
+      <div class="edu-major">BSc (Hons) Actuarial Science — Probability and systems thinking carries into every technical decision</div>
+      <div class="edu-date">Graduated 2022</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-links">
+    <a href="https://github.com/whoshusni" target="_blank">GitHub</a>
+    <a href="https://x.com/whoshusni" target="_blank">X</a>
+    <a href="mailto:husni@example.com">Email</a>
+  </div>
+  <div class="f-note">Built with intention.</div>
+</footer>
+
+<script>
+(() => {
+  // ── Scroll-linked opacity/transform ──
+  // Each .s element fades in smoothly as it enters the viewport.
+  // Progress = how far the element has traveled from below the fold
+  // to its final resting position. 0 = hidden, 1 = fully visible.
+
+  const els = document.querySelectorAll('.s');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced) {
+    els.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+    return;
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+  // Easing — smooth cubic ease-out
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function updateScroll() {
+    const vh = window.innerHeight;
+    const trigger = vh * 0.88; // element starts appearing when 88% below viewport
+
+    els.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const baseDelay = parseFloat(el.dataset.delay || 0) * 1000;
+      // progress: 0 when bottom of element is at bottom of viewport,
+      //           1 when top of element reaches ~15% from top
+      const raw = (trigger - rect.top) / (vh * 0.75);
+      const p = ease(clamp01(raw - baseDelay));
+
+      el.style.opacity = p;
+      el.style.transform = `translateY(${lerp(40, 0, p)}px)`;
+    });
+
+    // ── Timeline fill + node lighting ──
+    const wrap = document.getElementById('timeline-wrap');
+    const fill = document.getElementById('timeline-fill');
+    const nodes = document.querySelectorAll('.tl-node');
+    const entries = document.querySelectorAll('.tl-entry');
+
+    if (wrap) {
+      const wrapRect = wrap.getBoundingClientRect();
+      const wrapTop = wrapRect.top;
+      const wrapH = wrapRect.height;
+      // How far we've scrolled into the timeline (0 = top just entering, 1 = bottom passed)
+      const scrollP = clamp01((vh * 0.6 - wrapTop) / (wrapH + vh * 0.4));
+
+      // Fill the track
+      fill.style.height = (scrollP * 100) + '%';
+
+      // Light up nodes
+      entries.forEach((entry, i) => {
+        const entryRect = entry.getBoundingClientRect();
+        const nodeCenter = entryRect.top + 20; // roughly where the node dot is
+        const nodeP = clamp01((vh * 0.7 - nodeCenter) / (vh * 0.3));
+
+        if (nodeP > 0.1) {
+          entry.classList.add('lit');
+          nodes[i].classList.add('lit');
+        } else {
+          entry.classList.remove('lit');
+          nodes[i].classList.remove('lit');
+        }
+      });
+    }
+
+    // ── Nav scroll state ──
+    const nav = document.getElementById('nav');
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+
+    // ── Active nav link ──
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('nav .links a');
+    let current = '';
+    sections.forEach(sec => {
+      if (sec.getBoundingClientRect().top < vh * 0.4) {
+        current = sec.id;
+      }
+    });
+    links.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial paint
+  updateScroll();
+})();
+</script>
+
+</body>
 </html>
