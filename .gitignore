@@ -1,3 +1,6 @@
 node_modules/
 dist/
 *.png
+
+# 3D rendered project icons
+!public/badges/*-3d.png
