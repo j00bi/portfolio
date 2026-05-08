@@ -240,7 +240,7 @@ const projects = [
       { text: "OpenClaw", cls: "badge-openclaw" }
     ],
     tags: ["Python", "LLM APIs", "Cron", "MCP", "Freqtrade"],
-    icon: "⚡"
+    icon: "badges/agent-harness-3d.png"
   },
   {
     title: "Meeting Min",
@@ -252,7 +252,7 @@ const projects = [
       { text: "Ollama", cls: "badge-whisper" }
     ],
     tags: ["Whisper", "Ollama", "Docker", "SSH", "Python"],
-    icon: "🎙️"
+    icon: "badges/meeting-min-3d.png"
   },
   {
     title: "RAG Demo",
@@ -264,7 +264,7 @@ const projects = [
       { text: "FastAPI", cls: "badge-rag" }
     ],
     tags: ["ChromaDB", "Ollama", "FastAPI", "Docker", "Oracle Cloud"],
-    icon: "🔍"
+    icon: "badges/rag-demo-3d.png"
   },
   {
     title: "Yeelight Backlight",
@@ -275,7 +275,7 @@ const projects = [
       { text: "Bulb", cls: "badge-bulb interactive-bulb" }
     ],
     tags: ["Python", "NumPy", "TCP", "MSS", "LAN"],
-    icon: "💡",
+    icon: "badges/yeelight-3d.png",
     yeelight: true
   }
 ];
@@ -326,7 +326,7 @@ projects.forEach(p => {
 
   card.innerHTML = `
     <div class="icon-3d-wrap">
-      <div class="icon-3d">${p.icon}</div>
+      <div class="icon-3d">${p.icon.includes('/') || p.icon.includes('.') ? `<img src="${p.icon}" alt="${p.title}" style="width:100%;height:100%;object-fit:contain;border-radius:20px;">` : p.icon}</div>
     </div>
     <div class="content">
       <div class="badges">${badgesHtml}</div>
