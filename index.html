@@ -24,8 +24,8 @@
   --amber: #e0a04a;
   --shadow: 0 8px 40px rgba(31,28,20,0.10);
   --shadow-lg: 0 28px 80px rgba(31,28,20,0.18);
-  --serif: Georgia, serif;
-  --sans: -apple-system, sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -82,7 +82,7 @@ nav .links a.active { background: var(--ink); color: var(--surface); }
 
 /* ─── HERO ─── */
 .hero {
-  min-height: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -145,7 +145,7 @@ nav .links a.active { background: var(--ink); color: var(--surface); }
 .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* ─── SCROLL FADE ─── */
-.s { opacity: 1; transform: translateY(0); transition: none; }
+.s { opacity: 0; transform: translateY(30px); transition: none; }
 
 /* ─── SECTION ─── */
 section { padding: 80px 0; }
